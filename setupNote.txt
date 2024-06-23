@@ -1,7 +1,9 @@
 ## StartUp
 
 // Before starting 
-// Make sure that .NET 8.0 and node.js are installed
+// Make sure that .NET 8.0 and node.js are installed in windows
+// for tsc to work in a new device, open PowerShell as administrator and set:
+// Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 // Make frontend and backend directories
 mkdir backend
@@ -18,15 +20,17 @@ mkdir Services
 // Setup empty frontend
 cd ../frontend
 npm init -y
-npm install --save-dev snowpack
 npm install react
 npm install react-dom
+npm install -g typescript
+tsc --init
 mkdir public
 mkdir src 
+mkdir build
 
 // Fill up public directory
 cd public
-touch index.html
+echo $null > index.html
 
 // Fill up source directory
 cd ../src
@@ -35,8 +39,8 @@ mkdir Contexts
 mkdir Hooks
 mkdir Models
 mkdir Services
-touch index.tsx
-touch App.tsx
+echo $null > index.tsx
+echo $null > App.tsx
 
 
 
@@ -82,4 +86,10 @@ npm run <action>
     npm test
 node <file.js>
 
+## Typescript Commands
 
+tsc
+    -noImplicitAny
+    -noOmitOnError
+    -target <target("ES2015")>
+tsc --init
