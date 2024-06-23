@@ -1,0 +1,85 @@
+## StartUp
+
+// Before starting 
+// Make sure that .NET 8.0 and node.js are installed
+
+// Make frontend and backend directories
+mkdir backend
+mkdir frontend
+
+// Setup empty backend
+cd backend
+dotnet new webapi -controllers -f net8.0
+mkdir Data
+mkdir Models
+mkdir Repositories
+mkdir Services
+
+// Setup empty frontend
+cd ../frontend
+npm init -y
+npm install --save-dev snowpack
+npm install react
+npm install react-dom
+mkdir public
+mkdir src 
+
+// Fill up public directory
+cd public
+touch index.html
+
+// Fill up source directory
+cd ../src
+mkdir Components
+mkdir Contexts
+mkdir Hooks
+mkdir Models
+mkdir Services
+touch index.tsx
+touch App.tsx
+
+
+
+
+
+
+## Dotnet Commands
+
+dotnet help
+dotnet --list-sdks
+dotnet new <console/webapi> net<version>         -----Really Useful-----
+    -controllers
+    -f
+dotnet list package
+    --include-transitive
+    --outdated
+    --inclide-prerelease
+dotnet add package <package>
+    --version <version>
+dotnet restore
+dotnet remove package <package>
+dotnet build
+dotnet run
+
+## Node.js Commands
+
+npm --help
+npm init
+    -y
+npm install <package(node-fetch)>
+npm view <package>
+npm list
+    --depth=<depth>
+npm update <package name>@<latest/version>
+npm outdated
+npm audit
+    fix
+    --force
+npm uninstall
+npm prune
+npm run <action>
+    npm start 
+    npm test
+node <file.js>
+
+
