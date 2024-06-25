@@ -1,6 +1,4 @@
 // Create users for a login system
-using Microsoft.AspNetCore.Identity;
-
 namespace backend.Models;
 public class User
 {

@@ -4,7 +4,7 @@ using backend.Exceptions;
 namespace backend.Services;
 
 // The service for user model
-public static class UserService
+public class UserService
 {
     // A list of users
     static List<User> users { get; }
@@ -57,7 +57,7 @@ public static class UserService
     public static void Delete(int id)
     {
         var index = users.FindIndex(u => u.id == id);
-        if (index == -1) return;
+        if (index == -1) throw new UserNotFoundException();
         users.RemoveAt(index);
     }
 
@@ -68,7 +68,7 @@ public static class UserService
     public static User Authenticate(string username, string password)
     {
         var user = users.FirstOrDefault(u => u.username == username && u.password == password);
-        if (user == null) throw new UserNotFoundException();
+        if (user == null) throw new UserLogInFailedException();
         return user;
     }
 }

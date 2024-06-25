@@ -12,6 +12,11 @@ mkdir frontend
 // Setup empty backend
 cd backend
 dotnet new webapi -controllers -f net8.0
+dotnet add package xunit
+dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 8.0
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet tool install --global dotnet-ef
 mkdir Data
 mkdir Models
 mkdir Repositories
@@ -64,6 +69,9 @@ dotnet restore
 dotnet remove package <package>
 dotnet build
 dotnet run
+
+dotnet ef migrations add InitialCreate --context <ClassContext>
+dotnet ef database update --context <ClassContext>
 
 ## Node.js Commands
 
