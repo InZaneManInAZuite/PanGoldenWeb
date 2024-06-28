@@ -17,7 +17,7 @@ namespace backendTests
             UserTestActions.Run(UserTestEnum.MAKE1USER);
 
             // Act & Assert
-            Assert.Throws<ExistingUserException>(() => UserTestActions.Run(UserTestEnum.MAKE1USER));
+            Assert.Throws<PanGoldenException>(() => UserTestActions.Run(UserTestEnum.MAKE1USER));
         }
 
         [Theory]
@@ -76,7 +76,7 @@ namespace backendTests
             User user = UserTestActions.TestUsers[value];
             User userCopy = user.copy();
             userCopy.username = UserTestActions.TestUsers[value + 1].username;
-            Assert.Throws<ExistingUserException>(() => UserService.Update(userCopy));
+            Assert.Throws<PanGoldenException>(() => UserService.Update(userCopy));
         }
 
         [Fact]
