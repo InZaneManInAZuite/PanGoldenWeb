@@ -6,7 +6,6 @@ using backend.Services;
 using backend.Exceptions;
 namespace backend.Controllers;
 
-
 [ApiController]
 [Route("[controller]")]
 public class TransactionServiceController : ControllerBase
@@ -24,16 +23,22 @@ public class TransactionServiceController : ControllerBase
         return TransactionService.GetAll();
     }
 
-    [HttpGet("{id}", Name = "GetTransactionById")]
-    public ActionResult<Transaction> GetById(int id)
+    [HttpGet("Account, {id}", Name = "GetTransactionsByAccount")]
+    public IEnumerable<Transaction> GetByAccount(Guid id)
+    {
+        return TransactionService.GetAllByAccountId(id);
+    }
+
+    [HttpGet("Transaction, {id}", Name = "GetTransactionById")]
+    public ActionResult<Transaction> GetById(Guid id)
     {
         try
         {
             return TransactionService.GetById(id);
         }
-        catch (TransactionNotFoundException)
+        catch (PanGoldenException e)
         {
-            return NotFound();
+            return NotFound(e.message);
         }
     }
 
@@ -51,23 +56,23 @@ public class TransactionServiceController : ControllerBase
         {
             return TransactionService.Update(transaction);
         }
-        catch (TransactionNotFoundException)
+        catch (PanGoldenException e)
         {
-            return NotFound();
+            return NotFound(e.message);
         }
     }
 
     [HttpDelete("{id}", Name = "DeleteTransaction")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(Guid id)
     {
         try
         {
             TransactionService.Delete(id);
             return NoContent();
         }
-        catch (TransactionNotFoundException)
+        catch (PanGoldenException e)
         {
-            return NotFound();
+            return NotFound(e.message);
         }
     }
 }

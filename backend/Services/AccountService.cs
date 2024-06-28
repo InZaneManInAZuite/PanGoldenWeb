@@ -29,14 +29,17 @@ namespace backend.Services
         // Get an account by id
         public static Account GetById(Guid id)
         {
-            var account = accounts.FirstOrDefault(a => a.id == id);
-            if (account == null) throw new PanGoldenException(ExceptionName.AccountNotFound);
+            Account account = accounts.FirstOrDefault(a => a.id == id) 
+                ?? throw new PanGoldenException(WarnName.AccountNotFound);
             return account;
         }
 
         // Add an account
         public static void Add(Account account)
         {
+            List<Account> userAccounts = GetAllByUserId(account.userId);
+            if (userAccounts.Any(a => a.name == account.name)) 
+                throw new PanGoldenException(WarnName.AccountExists);
             account.id = Guid.NewGuid();
             accounts.Add(account);
         }
@@ -44,9 +47,12 @@ namespace backend.Services
         // Update an account
         public static Account Update(Account account)
         {
-            var index = accounts.FindIndex(a => a.id == account.id);
-            if (index == -1) throw new PanGoldenException(ExceptionName.AccountNotFound);
-            accounts[index] = account;
+            List<Account> userAccounts = GetAllByUserId(account.userId);
+            int index = userAccounts.FindIndex(a => a.id == account.id);
+            if (index == -1) throw new PanGoldenException(WarnName.AccountNotFound);
+            if (userAccounts.Any(a => a.name == account.name && a.id != account.id)) 
+                throw new PanGoldenException(WarnName.AccountExists);
+            userAccounts[index] = account;
             return account;
         }
 
@@ -54,7 +60,7 @@ namespace backend.Services
         public static void Delete(Guid id)
         {
             var index = accounts.FindIndex(a => a.id == id);
-            if (index == -1) throw new PanGoldenException(ExceptionName.AccountNotFound);
+            if (index == -1) throw new PanGoldenException(WarnName.AccountNotFound);
             accounts.RemoveAt(index);
         }
     }

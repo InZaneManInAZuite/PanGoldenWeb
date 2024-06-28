@@ -2,7 +2,7 @@
 
 using System;
 
-public enum ExceptionName
+public enum WarnName
 {
     UserNotFound, AccountNotFound, TransactionNotFound,
     UserExists, AccountExists,
@@ -17,30 +17,30 @@ namespace backend.Exceptions
         public int errorCode { get; set; }
         public string message { get; set; }
         public bool status { get; } = false;
-        public PanGoldenException(ExceptionName item) {
+        public PanGoldenException(WarnName item){
             switch (item)
             {
-                case ExceptionName.UserNotFound:
+                case WarnName.UserNotFound:
                     this.message = "User not found";
                     this.errorCode = 404;
                     break;
-                case ExceptionName.AccountNotFound:
+                case WarnName.AccountNotFound:
                     this.message = "Account not found";
                     this.errorCode = 404;
                     break;
-                case ExceptionName.TransactionNotFound:
+                case WarnName.TransactionNotFound:
                     this.message = "Transaction not found";
                     this.errorCode = 404;
                     break;
-                case ExceptionName.UserExists:
+                case WarnName.UserExists:
                     this.message = "User already exists";
                     this.errorCode = 400;
                     break;
-                case ExceptionName.AccountExists:
+                case WarnName.AccountExists:
                     this.message = "Account already exists";
                     this.errorCode = 400;
                     break;
-                case ExceptionName.LoginFailed:
+                case WarnName.LoginFailed:
                     this.message = "Login failed";
                     this.errorCode = 401;
                     break;

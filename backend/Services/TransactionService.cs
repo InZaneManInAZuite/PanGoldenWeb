@@ -20,11 +20,16 @@ namespace backend.Services
         // Get all transactions
         public static List<Transaction> GetAll() => transactions;
 
+        // Get all transactions by account id
+        public static List<Transaction> GetAllByAccountId(Guid accountId)
+        {
+            return transactions.FindAll(t => t.accountId == accountId).ToList();
+        }
+
         // Get a transaction by id
         public static Transaction GetById(Guid id)
         {
-            var transaction = transactions.FirstOrDefault(t => t.id == id);
-            if (transaction == null) throw new PanGoldenException(ExceptionName.TransactionNotFound);
+            Transaction transaction = transactions.FirstOrDefault(t => t.id == id) ?? throw new PanGoldenException(WarnName.TransactionNotFound);
             return transaction;
         }
 
@@ -38,8 +43,8 @@ namespace backend.Services
         // Update a transaction
         public static Transaction Update(Transaction transaction)
         {
-            var index = transactions.FindIndex(t => t.id == transaction.id);
-            if (index == -1) throw new PanGoldenException(ExceptionName.TransactionNotFound);
+            int index = transactions.FindIndex(t => t.id == transaction.id);
+            if (index == -1) throw new PanGoldenException(WarnName.TransactionNotFound);
             transactions[index] = transaction;
             return transaction;
         }
@@ -47,8 +52,8 @@ namespace backend.Services
         // Delete a transaction
         public static void Delete(Guid id)
         {
-            var index = transactions.FindIndex(t => t.id == id);
-            if (index == -1) throw new PanGoldenException(ExceptionName.TransactionNotFound);
+            int index = transactions.FindIndex(t => t.id == id);
+            if (index == -1) throw new PanGoldenException(WarnName.TransactionNotFound);
             transactions.RemoveAt(index);
         }
     }

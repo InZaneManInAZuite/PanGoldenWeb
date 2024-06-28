@@ -6,4 +6,6 @@ class UserContext : DbContext
 {
     public UserContext(DbContextOptions<UserContext> options) : base(options) { }
     public DbSet<User> Users => Set<User>();
+    public DbSet<Account> Accounts => Set<Account>();
+    public DbSet<Transaction> Transactions => Set<Transaction>();
 }

@@ -22,16 +22,29 @@ public class UserServiceController : ControllerBase
         return UserService.GetAll();
     }
 
-    [HttpGet("{username}", Name = "GetUserByUsername")]
+    [HttpGet("Username, {username}", Name = "GetUserByUsername")]
     public ActionResult<User> GetByUsername(string username)
     {
         try
         {
             return UserService.GetByUsername(username);
         }
-        catch (UserNotFoundException)
+        catch (PanGoldenException e)
         {
-            return NotFound();
+            return NotFound(e.message);
+        }
+    }
+
+    [HttpGet("Id, {id}", Name = "GetUserById")]
+    public ActionResult<User> GetById(Guid id)
+    {
+        try
+        {
+            return UserService.GetById(id);
+        }
+        catch (PanGoldenException e)
+        {
+            return NotFound(e.message);
         }
     }
 
@@ -42,9 +55,9 @@ public class UserServiceController : ControllerBase
             User user = UserService.Authenticate(username, password);
             return user;
         }
-        catch (UserLogInFailedException)
+        catch (PanGoldenException e)
         {
-            return NotFound();
+            return NotFound(e.message);
         }
     }
 
@@ -56,9 +69,9 @@ public class UserServiceController : ControllerBase
             UserService.Add(user);
             return CreatedAtRoute("GetUserByUsername", new { username = user.username }, user);
         }
-        catch (ExistingUserException)
+        catch (PanGoldenException e)
         {
-            return BadRequest();
+            return BadRequest(e.message);
         }
     }
 
@@ -69,27 +82,25 @@ public class UserServiceController : ControllerBase
         {
             return UserService.Update(user);
         }
-        catch (UserNotFoundException)
+        catch (PanGoldenException e)
         {
+            if (e.errorCode == 404) return NotFound(e.message);
+            if (e.errorCode == 400) return BadRequest(e.message);
             return NotFound();
-        }
-        catch (ExistingUserException)
-        {
-            return BadRequest();
         }
     }
 
     [HttpDelete("{id}", Name = "DeleteUser")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(Guid id)
     {
         try
         {
             UserService.Delete(id);
             return NoContent();
         }
-        catch (UserNotFoundException)
+        catch (PanGoldenException e)
         {
-            return NotFound();
+            return NotFound(e.message);
         }
     }
 }

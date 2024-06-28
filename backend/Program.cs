@@ -17,6 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSqlite<UserContext>("Data Source=PanGoldenWeb.db");
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<TransactionService>();
 
 var app = builder.Build();
 
