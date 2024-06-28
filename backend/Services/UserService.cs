@@ -23,23 +23,23 @@ public class UserService
     public static User GetByUsername(string username)
     {
         var user = users.FirstOrDefault(u => u.username == username);
-        if (user == null) throw new UserNotFoundException();
+        if (user == null) throw new PanGoldenException(ExceptionName.UserNotFound);
         return user;
     }
 
     // Get a user by id
-    public static User GetById(int id) 
+    public static User GetById(Guid id) 
     {
         var user = users.FirstOrDefault(u => u.id == id);
-        if (user == null) throw new UserNotFoundException();
+        if (user == null) throw new PanGoldenException(ExceptionName.UserNotFound);
         return user;
     }
 
     // Add a user
     public static void Add(User user)
     {
-        if (users.Any(u => u.username == user.username)) throw new ExistingUserException();
-        user.id = nextId++;
+        if (users.Any(u => u.username == user.username)) throw new PanGoldenException(ExceptionName.UserExists);
+        user.id = Guid.NewGuid();
         users.Add(user);
     }
 
@@ -47,17 +47,17 @@ public class UserService
     public static User Update(User user)
     {
         var index = users.FindIndex(u => u.id == user.id);
-        if (index == -1) throw new UserNotFoundException();
-        if (users.Any(u => u.username == user.username && u.id != user.id)) throw new ExistingUserException();
+        if (index == -1) throw new PanGoldenException(ExceptionName.UserNotFound);
+        if (users.Any(u => u.username == user.username && u.id != user.id)) throw new PanGoldenException(ExceptionName.UserExists);
         users[index] = user;
         return user;
     }
 
     // Delete a user
-    public static void Delete(int id)
+    public static void Delete(Guid id)
     {
         var index = users.FindIndex(u => u.id == id);
-        if (index == -1) throw new UserNotFoundException();
+        if (index == -1) throw new PanGoldenException(ExceptionName.UserNotFound);
         users.RemoveAt(index);
     }
 
@@ -68,7 +68,7 @@ public class UserService
     public static User Authenticate(string username, string password)
     {
         var user = users.FirstOrDefault(u => u.username == username && u.password == password);
-        if (user == null) throw new UserLogInFailedException();
+        if (user == null) throw new PanGoldenException(ExceptionName.LoginFailed);
         return user;
     }
 }

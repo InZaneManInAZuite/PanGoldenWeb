@@ -37,7 +37,7 @@ namespace backendTests
             UserTestActions.Run(UserTestEnum.CLEARUSERS);
             UserTestActions.Run(UserTestEnum.MAKE10USERS);
             User user = UserTestActions.TestUsers[value];
-            User userCopy = user.copy(user);
+            User userCopy = user.copy();
 
             // Act
             userCopy.firstName = "Trusty" + user.firstName;
@@ -74,7 +74,7 @@ namespace backendTests
             UserTestActions.Run(UserTestEnum.CLEARUSERS);
             UserTestActions.Run(UserTestEnum.MAKE10USERS);
             User user = UserTestActions.TestUsers[value];
-            User userCopy = user.copy(user);
+            User userCopy = user.copy();
             userCopy.username = UserTestActions.TestUsers[value + 1].username;
             Assert.Throws<ExistingUserException>(() => UserService.Update(userCopy));
         }
