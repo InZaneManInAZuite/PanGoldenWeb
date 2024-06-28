@@ -52,7 +52,9 @@ public class AccountServiceController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            return BadRequest(e.Message);
+            if (e.errorCode == 404) return NotFound(e.Message);
+            if (e.errorCode == 400) return BadRequest(e.Message);
+            return NotFound();
         }
     }
 

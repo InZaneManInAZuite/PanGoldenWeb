@@ -37,6 +37,13 @@ namespace backend.Services
         // Add an account
         public static void Add(Account account)
         {
+            // Check if user exists
+            try {
+                UserService.GetById(account.userId);
+            } catch (PanGoldenException) {
+                throw new PanGoldenException(WarnName.UserNotFound);
+            }
+
             List<Account> userAccounts = GetAllByUserId(account.userId);
             if (userAccounts.Any(a => a.name == account.name)) 
                 throw new PanGoldenException(WarnName.AccountExists);

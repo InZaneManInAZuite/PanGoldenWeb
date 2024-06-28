@@ -8,7 +8,7 @@ public class UserService
 {
     // A list of users
     static List<User> users { get; }
-
+    
     // Static constructor to initialize the list of users
     static UserService()
     {

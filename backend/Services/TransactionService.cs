@@ -23,13 +23,20 @@ namespace backend.Services
         // Get all transactions by account id
         public static List<Transaction> GetAllByAccountId(Guid accountId)
         {
+            // Check if account exists
+            try {
+                AccountService.GetById(accountId);
+            } catch (PanGoldenException) {
+                throw new PanGoldenException(WarnName.AccountNotFound);
+            }
             return transactions.FindAll(t => t.accountId == accountId).ToList();
         }
 
         // Get a transaction by id
         public static Transaction GetById(Guid id)
         {
-            Transaction transaction = transactions.FirstOrDefault(t => t.id == id) ?? throw new PanGoldenException(WarnName.TransactionNotFound);
+            Transaction transaction = transactions.FirstOrDefault(t => t.id == id) 
+                ?? throw new PanGoldenException(WarnName.TransactionNotFound);
             return transaction;
         }
 

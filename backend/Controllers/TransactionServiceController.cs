@@ -45,8 +45,15 @@ public class TransactionServiceController : ControllerBase
     [HttpPost(Name = "AddTransaction")]
     public IActionResult Add(Transaction transaction)
     {
-        TransactionService.Add(transaction);
-        return CreatedAtRoute("GetById", new { id = transaction.id }, transaction);
+        try
+        {
+            TransactionService.Add(transaction);
+            return CreatedAtRoute("GetById", new { id = transaction.id }, transaction);
+        }
+        catch (PanGoldenException e)
+        {
+            return NotFound(e.message);
+        }
     }
 
     [HttpPut(Name = "UpdateTransaction")]
