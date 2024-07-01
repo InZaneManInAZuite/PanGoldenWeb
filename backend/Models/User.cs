@@ -1,7 +1,8 @@
 // Create users for a login system
-using System.Data.SqlTypes;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models;
+[PrimaryKey(nameof(id))]
 public class User
 {
     public Guid id {get; set;}

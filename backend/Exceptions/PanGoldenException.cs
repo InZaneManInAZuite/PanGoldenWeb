@@ -17,6 +17,11 @@ namespace backend.Exceptions
         public int errorCode { get; set; }
         public string message { get; set; }
         public bool status { get; } = false;
+
+        public PanGoldenException(Exception e) {
+            this.message = $"An error occurred: {e.Message}, Inner exception: {e.InnerException}";
+            this.errorCode = 500;
+        }
         public PanGoldenException(WarnName item){
             switch (item)
             {

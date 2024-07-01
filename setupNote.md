@@ -4,6 +4,10 @@
 // Make sure that .NET 8.0 and node.js are installed in windows
 // for tsc to work in a new device, open PowerShell as administrator and set:
 // Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+// Install SQL Server Developer, server name = (local)
+
+// Currently no Identity Framework for User Authentication/Authorization, Time Constraint
+
 
 // Make frontend and backend directories
 mkdir backend

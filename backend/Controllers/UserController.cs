@@ -7,27 +7,29 @@ namespace backend.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserServiceController : ControllerBase
+public class UserController : ControllerBase
 {
-    private readonly ILogger<UserServiceController> _logger;
+    private readonly ILogger<UserController> _logger;
+    private readonly UserService _userService;
 
-    public UserServiceController(ILogger<UserServiceController> logger)
+    public UserController(ILogger<UserController> logger, UserService userService)
     {
         _logger = logger;
+        _userService = userService;
     }
 
     [HttpGet(Name = "GetAllUsers")]
-    public IEnumerable<User> GetAll()
+    public async Task<IEnumerable<User>> GetAll()
     {
-        return UserService.GetAll();
+        return await _userService.GetAll();
     }
 
     [HttpGet("Username, {username}", Name = "GetUserByUsername")]
-    public ActionResult<User> GetByUsername(string username)
+    public async Task<ActionResult<User>> GetByUsername(string username)
     {
         try
-        {
-            return UserService.GetByUsername(username);
+        { 
+            return Ok(await _userService.GetByUsername(username));
         }
         catch (PanGoldenException e)
         {
@@ -36,11 +38,11 @@ public class UserServiceController : ControllerBase
     }
 
     [HttpGet("Id, {id}", Name = "GetUserById")]
-    public ActionResult<User> GetById(Guid id)
+    public async Task<ActionResult<User>> GetById(Guid id)
     {
         try
         {
-            return UserService.GetById(id);
+            return Ok(await _userService.GetById(id));
         }
         catch (PanGoldenException e)
         {
@@ -49,10 +51,10 @@ public class UserServiceController : ControllerBase
     }
 
     [HttpGet("{username}, {password}", Name = "AuthenticateUser")]
-    public ActionResult<User> Authenticate(string username, string password)
+    public async Task<ActionResult<User>> Authenticate(string username, string password)
     {
         try {
-            User user = UserService.Authenticate(username, password);
+            User user = await _userService.Authenticate(username, password);
             return user;
         }
         catch (PanGoldenException e)
@@ -62,45 +64,49 @@ public class UserServiceController : ControllerBase
     }
 
     [HttpPost(Name = "AddUser")]
-    public IActionResult Add(User user)
+    public async Task<IActionResult> Add(User user)
     {
         try
         {
-            UserService.Add(user);
+            await _userService.Add(user);
             return CreatedAtRoute("GetUserByUsername", new { username = user.username }, user);
         }
         catch (PanGoldenException e)
         {
-            return BadRequest(e.message);
+            if (e.errorCode == 400) return BadRequest(e.message);
+            if (e.errorCode == 500) return StatusCode(500, e.message);
+            return NotFound();
         }
     }
 
     [HttpPut(Name = "UpdateUser")]
-    public ActionResult<User> Update(User user)
+    public async Task<ActionResult<User>> Update(User user)
     {
         try
         {
-            return UserService.Update(user);
+            return Ok(await _userService.Update(user));
         }
         catch (PanGoldenException e)
         {
             if (e.errorCode == 404) return NotFound(e.message);
-            if (e.errorCode == 400) return BadRequest(e.message);
+            if (e.errorCode == 500) return StatusCode(500, e.message);
             return NotFound();
         }
     }
 
     [HttpDelete("{id}", Name = "DeleteUser")]
-    public IActionResult Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         try
         {
-            UserService.Delete(id);
+            await _userService.Delete(id);
             return NoContent();
         }
         catch (PanGoldenException e)
         {
-            return NotFound(e.message);
+            if (e.errorCode == 404) return NotFound(e.message);
+            if (e.errorCode == 500) return StatusCode(500, e.message);
+            return NotFound();
         }
     }
 }

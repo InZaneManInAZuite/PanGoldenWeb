@@ -1,72 +1,120 @@
 // Includes necessary libraries and the User model and exceptions
 using backend.Models;
 using backend.Exceptions;
+using backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace backend.Services;
 
 // The service for user model
-public class UserService
+public class UserService(PanGoldenContext context)
 {
-    // A list of users
-    static List<User> users { get; }
-    
-    // Static constructor to initialize the list of users
-    static UserService()
-    {
-        users = new List<User>();
-    }
-
     // Get all users
-    public static List<User> GetAll() => users;
+    public async Task<IEnumerable<User>> GetAll() => await context.Users.ToListAsync();
 
     // Get a user by username
-    public static User GetByUsername(string username)
+    public async Task<User> GetByUsername(string username)
     {
-        var user = users.FirstOrDefault(u => u.username == username);
-        if (user == null) throw new PanGoldenException(WarnName.UserNotFound);
+        // Check if user exists
+        var user = await context.Users.FirstOrDefaultAsync(u => u.username == username) 
+            ?? throw new PanGoldenException(WarnName.UserNotFound);
+
+        // Return user
         return user;
     }
 
     // Get a user by id
-    public static User GetById(Guid id) 
+    public async Task<User> GetById(Guid id)
     {
-        var user = users.FirstOrDefault(u => u.id == id);
-        if (user == null) throw new PanGoldenException(WarnName.UserNotFound);
+        // Check if user exists
+        var user = await context.Users.FirstOrDefaultAsync(u => u.id == id)
+            ?? throw new PanGoldenException(WarnName.UserNotFound);
+
+        // Return user
         return user;
     }
 
     // Add a user
-    public static void Add(User user)
+    public async Task Add(User user)
     {
-        if (users.Any(u => u.username == user.username)) throw new PanGoldenException(WarnName.UserExists);
+        // Check if username exists
+        if (await context.Users.AnyAsync(u => u.username == user.username)) 
+            throw new PanGoldenException(WarnName.UserExists);
+
+        // Generate user id
         user.id = Guid.NewGuid();
-        users.Add(user);
+
+        // Add user to database
+        try {
+            await context.Users.AddAsync(user);
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new PanGoldenException(e);
+        }
     }
 
     // Update a user
-    public static User Update(User user)
+    public async Task<User> Update(User user)
     {
-        var index = users.FindIndex(u => u.id == user.id);
-        if (index == -1) throw new PanGoldenException(WarnName.UserNotFound);
-        if (users.Any(u => u.username == user.username && u.id != user.id)) throw new PanGoldenException(WarnName.UserExists);
-        users[index] = user;
+        // Check if user exists
+        var userFound = await context.Users.FirstOrDefaultAsync(u => u.id == user.id)
+            ?? throw new PanGoldenException(WarnName.UserNotFound);
+
+        // Check if username exists
+        if (await context.Users.AnyAsync(u => u.username == user.username && u.id != user.id)) 
+            throw new PanGoldenException(WarnName.UserExists);
+        
+        // Update user
+        try {
+            context.Users.Update(user);
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new PanGoldenException(e);
+        }
+
+        // Return User
         return user;
     }
 
     // Delete a user
-    public static void Delete(Guid id)
+    public async Task Delete(Guid id)
     {
-        var index = users.FindIndex(u => u.id == id);
-        if (index == -1) throw new PanGoldenException(WarnName.UserNotFound);
-        users.RemoveAt(index);
+        // Check if user exists
+        var user = await context.Users.FirstOrDefaultAsync(u => u.id == id) 
+            ?? throw new PanGoldenException(WarnName.UserNotFound);
+
+        // Delete user
+        try {
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new PanGoldenException(e); 
+        }
     }
 
     // Delete all users
-    public static void Clear() => users.Clear();
+    public async Task Clear()
+    {
+        try {
+            context.Users.RemoveRange(context.Users);
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new PanGoldenException(e);
+        }
+    }
 
     // Authenticate a user
-    public static User Authenticate(string username, string password)
+    public async Task<User> Authenticate(string username, string password)
     {
-        var user = users.FirstOrDefault(u => u.username == username && u.password == password);
+        var user = await context.Users.FirstOrDefaultAsync(u => u.username == username && u.password == password);
         if (user == null) throw new PanGoldenException(WarnName.LoginFailed);
         return user;
     }

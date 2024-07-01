@@ -7,14 +7,21 @@ using backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("PanGoldenWeb") ?? "Data Source=PanGoldenWeb.db";
+builder.Services.AddControllers();
+
+// Configure DbContext before building the app
+
+var connectionString = builder.Configuration.GetConnectionString("PanGoldenWeb") ?? "Server=(local);Database=PanGoldenWeb;Trusted_Connection=True;TrustServerCertificate=True;";
+
+builder.Services.AddDbContext<PanGoldenContext>(options => options.UseSqlServer(connectionString));
+
+// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSqlite<UserContext>("Data Source=PanGoldenWeb.db");
 
 builder.Services.AddSwaggerGen();
 

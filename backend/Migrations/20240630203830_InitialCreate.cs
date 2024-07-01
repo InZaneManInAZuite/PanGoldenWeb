@@ -15,10 +15,10 @@ namespace backend.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", nullable: false),
-                    untrackedBalance = table.Column<double>(type: "REAL", nullable: false),
-                    userId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    untrackedBalance = table.Column<double>(type: "float", nullable: false),
+                    userId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,12 +29,12 @@ namespace backend.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    type = table.Column<string>(type: "TEXT", nullable: false),
-                    description = table.Column<string>(type: "TEXT", nullable: false),
-                    amount = table.Column<double>(type: "REAL", nullable: false),
-                    date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    accountId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    amount = table.Column<double>(type: "float", nullable: false),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    accountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,11 +45,11 @@ namespace backend.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    firstName = table.Column<string>(type: "TEXT", nullable: false),
-                    lastName = table.Column<string>(type: "TEXT", nullable: true),
-                    username = table.Column<string>(type: "TEXT", nullable: false),
-                    password = table.Column<string>(type: "TEXT", nullable: false)
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

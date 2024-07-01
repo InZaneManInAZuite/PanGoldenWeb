@@ -1,0 +1,5 @@
+{
+    "dataworkspace.excludedProjects": [
+        "PanGoldenWeb/PanGoldenWeb.sqlproj"
+    ]
+}

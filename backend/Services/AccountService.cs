@@ -2,73 +2,104 @@
 
 using backend.Models;
 using backend.Exceptions;
+using backend.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace backend.Services
+
+namespace backend.Services;
+
+// The service for account model
+public class AccountService(PanGoldenContext context)
 {
-    // The service for account model
-    public class AccountService
+
+    // Get all accounts
+    public async Task<IEnumerable<Account>> GetAll() => await context.Accounts.ToListAsync();
+
+    // Get all accounts by user id
+    public async Task<IEnumerable<Account>> GetAllByUserId(Guid userId) 
+        => await context.Accounts.Where(a => a.userId == userId).ToListAsync();
+
+    // Get an account by id
+    public async Task<Account> GetById(Guid id)
     {
-        // A list of accounts
-        static List<Account> accounts { get; }
+        // Check if account exists
+        var account = await context.Accounts.FirstOrDefaultAsync(a => a.id == id) 
+            ?? throw new PanGoldenException(WarnName.AccountNotFound);
 
-        // Static constructor to initialize the list of accounts
-        static AccountService()
+        // Return account
+        return account;
+    }
+
+    // Add an account
+    public async Task Add(Account account)
+    {
+        // Check if user exists
+        User user = await context.Users.FirstAsync(u => u.id == account.userId)
+            ?? throw new PanGoldenException(WarnName.UserNotFound);
+
+        // Check if account name exists
+        IEnumerable<Account> userAccounts = await GetAllByUserId(account.userId);
+        if (userAccounts.Any(a => a.name == account.name))
+            throw new PanGoldenException(WarnName.AccountExists);
+
+        // Generate account id
+        account.id = Guid.NewGuid();
+
+        // Add account to database
+        try
         {
-            accounts = new List<Account>();
+            context.Accounts.Add(account);
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new PanGoldenException(e);
+        }
+    }
+
+    // Update an account
+    public async Task<Account> Update(Account account)
+    {
+        // Check if account exists
+        IEnumerable<Account> userAccounts = await GetAllByUserId(account.userId);
+        if (!userAccounts.Any(a => a.id == account.id))
+            throw new PanGoldenException(WarnName.AccountNotFound);
+
+        // Check if account name exists
+        if (userAccounts.Any(a => a.name == account.name && a.id != account.id))
+            throw new PanGoldenException(WarnName.AccountExists);
+
+        // Update account in database
+        try
+        {
+            context.Accounts.Update(account);
+            await context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            throw new PanGoldenException(e);
         }
 
-        // Get all accounts
-        public static List<Account> GetAll() => accounts;
+        // Return account
+        return account;
+    }
 
-        // Get all accounts by user id
-        public static List<Account> GetAllByUserId(Guid userId)
+    // Delete an account
+    public async Task Delete(Guid id)
+    {
+        // Check if account exists
+        var account = await context.Accounts.FirstOrDefaultAsync(a => a.id == id) 
+            ?? throw new PanGoldenException(WarnName.AccountNotFound);
+
+        // Delete account from database
+        try
         {
-            return accounts.Where(a => a.userId == userId).ToList();
+            context.Accounts.Remove(account);
+            await context.SaveChangesAsync();
         }
-
-        // Get an account by id
-        public static Account GetById(Guid id)
+        catch (Exception e)
         {
-            Account account = accounts.FirstOrDefault(a => a.id == id) 
-                ?? throw new PanGoldenException(WarnName.AccountNotFound);
-            return account;
-        }
-
-        // Add an account
-        public static void Add(Account account)
-        {
-            // Check if user exists
-            try {
-                UserService.GetById(account.userId);
-            } catch (PanGoldenException) {
-                throw new PanGoldenException(WarnName.UserNotFound);
-            }
-
-            List<Account> userAccounts = GetAllByUserId(account.userId);
-            if (userAccounts.Any(a => a.name == account.name)) 
-                throw new PanGoldenException(WarnName.AccountExists);
-            account.id = Guid.NewGuid();
-            accounts.Add(account);
-        }
-
-        // Update an account
-        public static Account Update(Account account)
-        {
-            List<Account> userAccounts = GetAllByUserId(account.userId);
-            int index = userAccounts.FindIndex(a => a.id == account.id);
-            if (index == -1) throw new PanGoldenException(WarnName.AccountNotFound);
-            if (userAccounts.Any(a => a.name == account.name && a.id != account.id)) 
-                throw new PanGoldenException(WarnName.AccountExists);
-            userAccounts[index] = account;
-            return account;
-        }
-
-        // Delete an account
-        public static void Delete(Guid id)
-        {
-            var index = accounts.FindIndex(a => a.id == id);
-            if (index == -1) throw new PanGoldenException(WarnName.AccountNotFound);
-            accounts.RemoveAt(index);
+            throw new PanGoldenException(e);
         }
     }
 }

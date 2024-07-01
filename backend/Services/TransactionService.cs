@@ -2,66 +2,92 @@
 
 using backend.Models;
 using backend.Exceptions;
+using backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace backend.Services
 {
     // The service for transaction model
-    public class TransactionService
+    public class TransactionService(PanGoldenContext context)
     {
-        // A list of transactions
-        static List<Transaction> transactions { get; }
-
-        // Static constructor to initialize the list of transactions
-        static TransactionService()
-        {
-            transactions = new List<Transaction>();
-        }
-
         // Get all transactions
-        public static List<Transaction> GetAll() => transactions;
+        public async Task<IEnumerable<Transaction>> GetAll() => await context.Transactions.ToListAsync();
 
         // Get all transactions by account id
-        public static List<Transaction> GetAllByAccountId(Guid accountId)
-        {
-            // Check if account exists
-            try {
-                AccountService.GetById(accountId);
-            } catch (PanGoldenException) {
-                throw new PanGoldenException(WarnName.AccountNotFound);
-            }
-            return transactions.FindAll(t => t.accountId == accountId).ToList();
-        }
+        public async Task<IEnumerable<Transaction>> GetAllByAccountId(Guid accountId) 
+            => await context.Transactions.Where(t => t.accountId == accountId).ToListAsync();
 
         // Get a transaction by id
-        public static Transaction GetById(Guid id)
+        public async Task<Transaction> GetById(Guid id)
         {
-            Transaction transaction = transactions.FirstOrDefault(t => t.id == id) 
+            // Check if transaction exists
+            var transaction = await context.Transactions.FirstOrDefaultAsync(t => t.id == id) 
                 ?? throw new PanGoldenException(WarnName.TransactionNotFound);
+
+            // Return transaction
             return transaction;
         }
 
         // Add a transaction
-        public static void Add(Transaction transaction)
+        public async Task Add(Transaction transaction)
         {
+            // Check if account exists
+            Account account = await context.Accounts.FirstAsync(a => a.id == transaction.accountId)
+                ?? throw new PanGoldenException(WarnName.AccountNotFound);
+
+            // Generate transaction id
             transaction.id = Guid.NewGuid();
-            transactions.Add(transaction);
+
+            // Add transaction to database
+            try
+            {
+                context.Transactions.Add(transaction);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new PanGoldenException(e);
+            }
         }
 
         // Update a transaction
-        public static Transaction Update(Transaction transaction)
+        public async Task<Transaction> Update(Transaction transaction)
         {
-            int index = transactions.FindIndex(t => t.id == transaction.id);
-            if (index == -1) throw new PanGoldenException(WarnName.TransactionNotFound);
-            transactions[index] = transaction;
-            return transaction;
+            // Check if transaction exists
+            var oldTransaction = await context.Transactions.FirstOrDefaultAsync(t => t.id == transaction.id)
+                ?? throw new PanGoldenException(WarnName.TransactionNotFound);
+
+            // Save changes
+            try
+            {
+                context.Transactions.Update(transaction);
+                await context.SaveChangesAsync();
+                return transaction;
+            }
+            catch (Exception e)
+            {
+                throw new PanGoldenException(e);
+            }
         }
 
         // Delete a transaction
-        public static void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            int index = transactions.FindIndex(t => t.id == id);
-            if (index == -1) throw new PanGoldenException(WarnName.TransactionNotFound);
-            transactions.RemoveAt(index);
+            // Check if transaction exists
+            var transaction = await context.Transactions.FirstOrDefaultAsync(t => t.id == id)
+                ?? throw new PanGoldenException(WarnName.TransactionNotFound);
+
+            // Delete transaction
+            try
+            {
+                context.Transactions.Remove(transaction);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new PanGoldenException(e);
+            }
         }
     }
 }
