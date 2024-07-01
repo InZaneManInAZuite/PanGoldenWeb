@@ -36,6 +36,10 @@ namespace backend.Services
             Account account = await context.Accounts.FirstAsync(a => a.id == transaction.accountId)
                 ?? throw new PanGoldenException(WarnName.AccountNotFound);
 
+            // Make sure account id and account matches
+            if (account.id != transaction.accountId)
+                throw new PanGoldenException(WarnName.AccountMismatch);
+
             // Generate transaction id
             transaction.id = Guid.NewGuid();
 
@@ -58,10 +62,13 @@ namespace backend.Services
             var oldTransaction = await context.Transactions.FirstOrDefaultAsync(t => t.id == transaction.id)
                 ?? throw new PanGoldenException(WarnName.TransactionNotFound);
 
+            // Update transaction
+            oldTransaction.update(transaction);
+
             // Save changes
             try
             {
-                context.Transactions.Update(transaction);
+                context.Transactions.Update(oldTransaction);
                 await context.SaveChangesAsync();
                 return transaction;
             }

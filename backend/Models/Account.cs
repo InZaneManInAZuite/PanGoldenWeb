@@ -7,25 +7,31 @@ namespace backend.Models;
 public class Account
 {
     public Guid id { get; set; }
-    public required string name { get; set; }
+    public string name { get; set; }
 
-    public required double untrackedBalance { get; set; }
+    public double untrackedBalance { get; set; } = 0;
 
-    public required Guid userId { get; set; }
+    public Guid userId { get; set; }
+    public User user { get; set; }
 
-    public Account() { }
+    public Account() {}
 
-    public Account(string name, Guid userId)
+    private Account(Guid id, string name, double untrackedBalance, Guid userId)
     {
+        this.id = id;
         this.name = name;
-        this.untrackedBalance = 0;
+        this.untrackedBalance = untrackedBalance;
         this.userId = userId;
     }
 
-    public Account(string name, double balance, Guid userId)
+    public Account copy() 
     {
-        this.name = name;
-        this.untrackedBalance = balance;
-        this.userId = userId;
+        return new Account(id, name, untrackedBalance, userId);
+    }
+
+    public void update(Account account)
+    {
+        this.name = account.name;
+        this.untrackedBalance = account.untrackedBalance;
     }
 }

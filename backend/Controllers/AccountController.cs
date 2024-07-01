@@ -54,9 +54,9 @@ public class AccountController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.errorCode == 404) return NotFound(e.Message);
-            if (e.errorCode == 400) return BadRequest(e.Message);
-            if (e.errorCode == 500) return StatusCode(500, e.Message);
+            if (e.errorCode == 404) return NotFound(e.message);
+            if (e.errorCode == 400) return BadRequest(e.message);
+            if (e.errorCode == 500) return StatusCode(500, e.message);
             return NotFound();
         }
     }
@@ -71,9 +71,9 @@ public class AccountController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.errorCode == 404) return NotFound(e.Message);
-            if (e.errorCode == 400) return BadRequest(e.Message);
-            if (e.errorCode == 500) return StatusCode(500, e.Message);
+            if (e.errorCode == 404) return NotFound(e.message);
+            if (e.errorCode == 400) return BadRequest(e.message);
+            if (e.errorCode == 500) return StatusCode(500, e.message);
             return NotFound();
         }
     }
@@ -88,8 +88,8 @@ public class AccountController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.errorCode == 404) return NotFound(e.Message);
-            if (e.errorCode == 500) return StatusCode(500, e.Message);
+            if (e.errorCode == 404) return NotFound(e.message);
+            if (e.errorCode == 500) return StatusCode(500, e.message);
             return NotFound();
         }
     }

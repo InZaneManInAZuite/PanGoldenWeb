@@ -5,21 +5,33 @@ namespace backend.Models;
 [PrimaryKey(nameof(id))]
 public class User
 {
-    public Guid id {get; set;}
-    public required string firstName {get; set;}
-    public string? lastName {get; set;}
-    public required string username {get; set;}
-    public required string password {get; set;}
-    
+    public Guid id { get; set; }
+    public string firstName { get; set; }
+    public string? lastName { get; set; }
+    public string username { get; set; }
+    public string password { get; set; }
+
+    public User() { }
+
+    private User(Guid id, string firstName, string lastName, string username, string password)
+    {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
+
     public User copy()
     {
-        return new User
-        {
-            id = this.id,
-            firstName = this.firstName,
-            lastName = this.lastName,
-            username = this.username,
-            password = this.password
-        };
+        return new User(id, firstName, lastName, username, password);
+    }
+
+    public void update(User user)
+    {
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.username = user.username;
+        this.password = user.password;
     }
 }

@@ -65,10 +65,14 @@ public class UserService(PanGoldenContext context)
         // Check if username exists
         if (await context.Users.AnyAsync(u => u.username == user.username && u.id != user.id)) 
             throw new PanGoldenException(WarnName.UserExists);
+
+        
+        // Transfer user data
+        userFound.update(user);
         
         // Update user
         try {
-            context.Users.Update(user);
+            context.Users.Update(userFound);
             await context.SaveChangesAsync();
         }
         catch (Exception e)

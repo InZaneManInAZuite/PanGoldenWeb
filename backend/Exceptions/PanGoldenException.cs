@@ -6,7 +6,8 @@ public enum WarnName
 {
     UserNotFound, AccountNotFound, TransactionNotFound,
     UserExists, AccountExists,
-    LoginFailed
+    LoginFailed,
+    UserMismatch, AccountMismatch
 
 }
 
@@ -48,6 +49,14 @@ namespace backend.Exceptions
                 case WarnName.LoginFailed:
                     this.message = "Login failed";
                     this.errorCode = 401;
+                    break;
+                case WarnName.UserMismatch:
+                    this.message = "User mismatch";
+                    this.errorCode = 400;
+                    break;
+                case WarnName.AccountMismatch:
+                    this.message = "Account mismatch";
+                    this.errorCode = 400;
                     break;
                 default:
                     this.message = "Item not found";

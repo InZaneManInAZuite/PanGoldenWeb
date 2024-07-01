@@ -37,6 +37,10 @@ public class AccountService(PanGoldenContext context)
         User user = await context.Users.FirstAsync(u => u.id == account.userId)
             ?? throw new PanGoldenException(WarnName.UserNotFound);
 
+        // Make sure userid matches the account userid
+        if (user.id != account.userId)
+            throw new PanGoldenException(WarnName.UserMismatch);
+
         // Check if account name exists
         IEnumerable<Account> userAccounts = await GetAllByUserId(account.userId);
         if (userAccounts.Any(a => a.name == account.name))
