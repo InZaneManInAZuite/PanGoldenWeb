@@ -50,7 +50,7 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpGet("{username}, {password}", Name = "AuthenticateUser")]
+    [HttpGet("Auth, {username}, {password}", Name = "AuthenticateUser")]
     public async Task<ActionResult<User>> Authenticate(string username, string password)
     {
         try {
@@ -89,6 +89,7 @@ public class UserController : ControllerBase
         catch (PanGoldenException e)
         {
             if (e.errorCode == 404) return NotFound(e.message);
+            if (e.errorCode == 400) return BadRequest(e.message);
             if (e.errorCode == 500) return StatusCode(500, e.message);
             return NotFound();
         }

@@ -12,16 +12,16 @@ public class Transaction
 {
     public Guid id { get; set; }
 
-    public TransactionType type { get; set; }
-    public string description { get; set; }
-    public double amount { get; set; }
-    public DateTime date { get; set; }
-    public Guid accountId { get; set; }
-    public Account account { get; set; }
+    public TransactionType? type { get; set; }
+    public string? description { get; set; }
+    public double? amount { get; set; }
+    public DateTime? date { get; set; }
+    public Guid? accountId { get; set; }
+    public Account? account { get; set; }
 
     public Transaction() { }
 
-    private Transaction(Guid id, TransactionType type, string description, double amount, DateTime date, Guid accountId)
+    private Transaction(Guid id, TransactionType? type, string? description, double? amount, DateTime? date, Guid? accountId, Account? account)
     {
         this.id = id;
         this.type = type;
@@ -29,18 +29,19 @@ public class Transaction
         this.amount = amount;
         this.date = date;
         this.accountId = accountId;
+        this.account = account;
     }
 
     public Transaction copy()
     {
-        return new Transaction(id, type, description, amount, date, accountId);
+        return new Transaction(id, type, description, amount, date, accountId, account);
     }
 
     public void update(Transaction transaction)
     {
-        this.type = transaction.type;
-        this.description = transaction.description;
-        this.amount = transaction.amount;
-        this.date = transaction.date;
+        if (transaction.type != null) type = transaction.type;
+        if (transaction.description != null) description = transaction.description;
+        if (transaction.amount != null) amount = transaction.amount;
+        if (transaction.date != null) date = transaction.date;
     }
 }

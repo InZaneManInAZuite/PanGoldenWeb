@@ -17,11 +17,9 @@ mkdir frontend
 cd backend
 dotnet new webapi -controllers -f net8.0
 dotnet add package xunit
-dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 8.0
-dotnet add package Microsoft.EntityFrameworkCore.Relational
-dotnet add package Microsoft.Data.SqlClient
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Swashbuckle.AspNetCore
 dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet tool install --global dotnet-ef
 mkdir Data
 mkdir Models

@@ -6,14 +6,14 @@ namespace backend.Models;
 public class User
 {
     public Guid id { get; set; }
-    public string firstName { get; set; }
+    public string? firstName { get; set; }
     public string? lastName { get; set; }
-    public string username { get; set; }
-    public string password { get; set; }
+    public string? username { get; set; }
+    public string? password { get; set; }
 
     public User() { }
 
-    private User(Guid id, string firstName, string lastName, string username, string password)
+    private User(Guid id, string? firstName, string? lastName, string? username, string? password)
     {
         this.id = id;
         this.firstName = firstName;
@@ -29,9 +29,9 @@ public class User
 
     public void update(User user)
     {
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.username = user.username;
-        this.password = user.password;
+        if (user.firstName != null) firstName = user.firstName;
+        if (user.lastName != null) lastName = user.lastName;
+        if (user.username != null) username = user.username;
+        if (user.password != null) password = user.password;
     }
 }

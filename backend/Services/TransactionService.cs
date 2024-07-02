@@ -33,12 +33,8 @@ namespace backend.Services
         public async Task Add(Transaction transaction)
         {
             // Check if account exists
-            Account account = await context.Accounts.FirstAsync(a => a.id == transaction.accountId)
+            transaction.account = await context.Accounts.FirstAsync(a => a.id == transaction.accountId)
                 ?? throw new PanGoldenException(WarnName.AccountNotFound);
-
-            // Make sure account id and account matches
-            if (account.id != transaction.accountId)
-                throw new PanGoldenException(WarnName.AccountMismatch);
 
             // Generate transaction id
             transaction.id = Guid.NewGuid();
@@ -59,18 +55,18 @@ namespace backend.Services
         public async Task<Transaction> Update(Transaction transaction)
         {
             // Check if transaction exists
-            var oldTransaction = await context.Transactions.FirstOrDefaultAsync(t => t.id == transaction.id)
+            var transactionFound = await context.Transactions.FirstOrDefaultAsync(t => t.id == transaction.id)
                 ?? throw new PanGoldenException(WarnName.TransactionNotFound);
 
             // Update transaction
-            oldTransaction.update(transaction);
-
+            transactionFound.update(transaction);
+ 
             // Save changes
             try
             {
-                context.Transactions.Update(oldTransaction);
+                context.Transactions.Update(transactionFound);
                 await context.SaveChangesAsync();
-                return transaction;
+                return transactionFound;
             }
             catch (Exception e)
             {

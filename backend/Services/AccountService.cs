@@ -13,7 +13,7 @@ public class AccountService(PanGoldenContext context)
 {
 
     // Get all accounts
-    public async Task<IEnumerable<Account>> GetAll() => await context.Accounts.ToListAsync();
+    public async Task<IEnumerable<Account>> GetAll() => await context.Accounts.Include(a => a.user).ToListAsync();
 
     // Get all accounts by user id
     public async Task<IEnumerable<Account>> GetAllByUserId(Guid userId) 
@@ -34,20 +34,18 @@ public class AccountService(PanGoldenContext context)
     public async Task Add(Account account)
     {
         // Check if user exists
-        User user = await context.Users.FirstAsync(u => u.id == account.userId)
+        account.user = await context.Users.FirstAsync(u => u.id == account.userId)
             ?? throw new PanGoldenException(WarnName.UserNotFound);
 
-        // Make sure userid matches the account userid
-        if (user.id != account.userId)
-            throw new PanGoldenException(WarnName.UserMismatch);
-
         // Check if account name exists
-        IEnumerable<Account> userAccounts = await GetAllByUserId(account.userId);
-        if (userAccounts.Any(a => a.name == account.name))
+        if (await context.Accounts.AnyAsync(a => a.name == account.name && a.userId == account.userId))
             throw new PanGoldenException(WarnName.AccountExists);
 
         // Generate account id
         account.id = Guid.NewGuid();
+
+        // Set default values
+        if (account.untrackedBalance == null) account.untrackedBalance = 0;
 
         // Add account to database
         try
@@ -62,30 +60,30 @@ public class AccountService(PanGoldenContext context)
     }
 
     // Update an account
-    public async Task<Account> Update(Account account)
+    public async Task<Account> Update(Account account) 
     {
         // Check if account exists
-        IEnumerable<Account> userAccounts = await GetAllByUserId(account.userId);
-        if (!userAccounts.Any(a => a.id == account.id))
-            throw new PanGoldenException(WarnName.AccountNotFound);
+        var accountFound = await context.Accounts.FirstOrDefaultAsync(a => a.id == account.id)
+            ?? throw new PanGoldenException(WarnName.AccountNotFound);
 
         // Check if account name exists
-        if (userAccounts.Any(a => a.name == account.name && a.id != account.id))
+        if (await context.Accounts.AnyAsync(a => a.name == account.name && a.id != account.id && a.userId == account.userId))
             throw new PanGoldenException(WarnName.AccountExists);
+
+        // Update account
+        accountFound.update(account);
 
         // Update account in database
         try
         {
-            context.Accounts.Update(account);
+            context.Accounts.Update(accountFound);
             await context.SaveChangesAsync();
+            return accountFound;
         }
         catch (Exception e)
         {
             throw new PanGoldenException(e);
         }
-
-        // Return account
-        return account;
     }
 
     // Delete an account

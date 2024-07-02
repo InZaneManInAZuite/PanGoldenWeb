@@ -74,14 +74,12 @@ public class UserService(PanGoldenContext context)
         try {
             context.Users.Update(userFound);
             await context.SaveChangesAsync();
+            return userFound;
         }
         catch (Exception e)
         {
             throw new PanGoldenException(e);
         }
-
-        // Return User
-        return user;
     }
 
     // Delete a user
