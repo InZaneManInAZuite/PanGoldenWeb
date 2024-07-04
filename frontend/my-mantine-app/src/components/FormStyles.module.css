@@ -1,0 +1,61 @@
+.container {
+    padding: 30px;
+}
+.card {
+    margin: auto;
+
+    width : 450px;
+    left: 50%;
+    
+    border-radius: 10px;
+    padding: 20px;
+
+    background-color: rgb(231, 231, 231);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    
+}
+
+.title {
+    font-family:
+        Greycliff CF,
+        var(--mantine-font-family);
+    font-weight: 700;
+    align: center;
+}
+
+.textInput {
+    font-weight: 500;
+
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: var(--mantine-radius-md);
+    height: rem(90px);
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+    transition:
+        box-shadow 150ms ease,
+        transform 100ms ease;
+}
+
+.submitButton {
+    font-family:
+        Greycliff CF,
+        var(--mantine-font-family);
+    font-weight: 700;
+    background-color: var(--mantine-color-indigo-500);
+    color: var(--mantine-color-white);
+    border-radius: var(--mantine-radius-md);
+    padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+
+    &:hover {
+        background-color: var(--mantine-color-indigo-600);
+    }
+}

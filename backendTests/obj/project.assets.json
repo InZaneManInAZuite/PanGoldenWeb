@@ -4160,11 +4160,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backendTests\\backendTests.csproj",
+      "projectUniqueName": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backendTests\\backendTests.csproj",
       "projectName": "backendTests",
-      "projectPath": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backendTests\\backendTests.csproj",
+      "projectPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backendTests\\backendTests.csproj",
       "packagesPath": "C:\\Users\\toshi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backendTests\\obj\\",
+      "outputPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backendTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\toshi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4179,8 +4179,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj": {
-              "projectPath": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj"
+            "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj": {
+              "projectPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj"
             }
           }
         }

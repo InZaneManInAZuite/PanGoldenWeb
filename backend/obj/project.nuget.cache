@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0XCR8HTdYjc=",
+  "dgSpecHash": "PRdGvDnvqPk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\toshi\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\toshi\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

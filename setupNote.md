@@ -4,8 +4,8 @@
 // Make sure that .NET 8.0 and node.js are installed in windows
 // for tsc to work in a new device, open PowerShell as administrator and set:
 // Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+//
 // Install SQL Server Developer, server name = (local)
-
 // Currently no Identity Framework for User Authentication/Authorization, Time Constraint
 
 
@@ -28,11 +28,18 @@ mkdir Services
 
 // Setup empty frontend
 cd ../frontend
+npm install -g typescript
+npx create-react-app my-mantine-app --template typescript
+
+
 npm init -y
+tsc --init
 npm install react
 npm install react-dom
-npm install -g typescript
-tsc --init
+npm install @mantine/core
+npx storybook@latest init
+
+npm install uuid
 mkdir public
 mkdir src 
 mkdir build

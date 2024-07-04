@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj": {}
+    "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj": {
+    "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\backend.csproj",
+        "projectPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\toshi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\toshi\\Source\\PanGoldenWeb\\backend\\obj\\",
+        "outputPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\toshi\\AppData\\Roaming\\NuGet\\NuGet.Config"
