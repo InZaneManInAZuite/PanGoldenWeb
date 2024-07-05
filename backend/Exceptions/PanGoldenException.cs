@@ -15,52 +15,53 @@ namespace backend.Exceptions
 {
     public class PanGoldenException : Exception
     {
-        public int errorCode { get; set; }
-        public string message { get; set; }
-        public bool status { get; } = false;
+        public int ErrorCode { get; set; }
+        
+        public new string Message { get; set; }
+        public bool Status { get; } = false;
 
         public PanGoldenException(Exception e) {
-            this.message = $"An error occurred: {e.Message}, Inner exception: {e.InnerException}";
-            this.errorCode = 500;
+            this.Message = $"An error occurred: {e.Message}, Inner exception: {e.InnerException}";
+            this.ErrorCode = 500;
         }
         public PanGoldenException(WarnName item){
             switch (item)
             {
                 case WarnName.UserNotFound:
-                    this.message = "User not found";
-                    this.errorCode = 404;
+                    this.Message = "User not found";
+                    this.ErrorCode = 404;
                     break;
                 case WarnName.AccountNotFound:
-                    this.message = "Account not found";
-                    this.errorCode = 404;
+                    this.Message = "Account not found";
+                    this.ErrorCode = 404;
                     break;
                 case WarnName.TransactionNotFound:
-                    this.message = "Transaction not found";
-                    this.errorCode = 404;
+                    this.Message = "Transaction not found";
+                    this.ErrorCode = 404;
                     break;
                 case WarnName.UserExists:
-                    this.message = "User already exists";
-                    this.errorCode = 400;
+                    this.Message = "User already exists";
+                    this.ErrorCode = 400;
                     break;
                 case WarnName.AccountExists:
-                    this.message = "Account already exists";
-                    this.errorCode = 400;
+                    this.Message = "Account already exists";
+                    this.ErrorCode = 400;
                     break;
                 case WarnName.LoginFailed:
-                    this.message = "Login failed";
-                    this.errorCode = 401;
+                    this.Message = "Login failed";
+                    this.ErrorCode = 401;
                     break;
                 case WarnName.UserMismatch:
-                    this.message = "User mismatch";
-                    this.errorCode = 400;
+                    this.Message = "User mismatch";
+                    this.ErrorCode = 400;
                     break;
                 case WarnName.AccountMismatch:
-                    this.message = "Account mismatch";
-                    this.errorCode = 400;
+                    this.Message = "Account mismatch";
+                    this.ErrorCode = 400;
                     break;
                 default:
-                    this.message = "Item not found";
-                    this.errorCode = 404;
+                    this.Message = "Item not found";
+                    this.ErrorCode = 404;
                     break;
             }
 

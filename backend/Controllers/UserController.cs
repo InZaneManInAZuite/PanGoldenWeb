@@ -74,8 +74,8 @@ public class UserController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.errorCode == 400) return BadRequest(e);
-            if (e.errorCode == 500) return StatusCode(500, e);
+            if (e.ErrorCode == 400) return BadRequest(e);
+            if (e.ErrorCode == 500) return StatusCode(500, e);
             return NotFound();
         }
     }
@@ -89,9 +89,9 @@ public class UserController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.errorCode == 404) return NotFound(e);
-            if (e.errorCode == 400) return BadRequest(e);
-            if (e.errorCode == 500) return StatusCode(500, e);
+            if (e.ErrorCode == 404) return NotFound(e);
+            if (e.ErrorCode == 400) return BadRequest(e);
+            if (e.ErrorCode == 500) return StatusCode(500, e);
             return NotFound();
         }
     }
@@ -106,8 +106,8 @@ public class UserController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.errorCode == 404) return NotFound(e);
-            if (e.errorCode == 500) return StatusCode(500, e);
+            if (e.ErrorCode == 404) return NotFound(e);
+            if (e.ErrorCode == 500) return StatusCode(500, e);
             return NotFound();
         }
     }
