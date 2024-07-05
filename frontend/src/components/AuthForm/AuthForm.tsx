@@ -1,23 +1,23 @@
 // Create a login and sign up form
 
 
-import { Anchor, Card, Group, Button, TextInput, PasswordInput, Stack } from '@mantine/core';
+import { Anchor, Card, Button, TextInput, PasswordInput, Stack } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
 import classes from './AuthForm.module.css';
 
+import { useToggle } from '@mantine/hooks';
+import { redirect } from 'react-router-dom';
 
-import { useToggle, upperFirst } from '@mantine/hooks';
-import React, { useState } from 'react';
+import { User } from '../../Models/PanGoldenModels';
+import { authenticateUser, addUser } from '../../Services/UserService';
 
 export const AuthForm: React.FC = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [type, toggle] = useToggle(['Login', 'Sign Up']);
+    const [type, toggleType] = useToggle(['Login', 'Sign Up']);
+    const [loginFail, toggleLoginFail] = useToggle([false, true]);
+    const [registerFail, toggleRegister] = useToggle([false, true]);
+
 
     const form = useForm({
         initialValues: {
@@ -26,6 +26,7 @@ export const AuthForm: React.FC = () => {
             username: '',
             password: '',
             confirmPassword: '',
+            loginFailed: false,
         },
 
         validate: {
@@ -33,8 +34,8 @@ export const AuthForm: React.FC = () => {
                 if (value.length <= 5) {
                     return 'Username must be at least 5 characters long';
                 }
-                if (value.length >= 15) {
-                    return 'Username must be at most 15 characters long';
+                if (value.length >= 20) {
+                    return 'Username must be at most 20 characters long';
                 }
             },
             password: (value) => {
@@ -43,21 +44,53 @@ export const AuthForm: React.FC = () => {
                 }
             },
             confirmPassword: (value) => {
-                if (value !== form.values.password) {
+                if (value !== form.values.password && type === 'Sign Up') {
                     return 'Passwords do not match';
                 }
             }
         }
     });
 
-    const handleLogin = () => {
+    const goHome = (user: User) => {
+        return redirect('/Home');
+    }
+
+    const handleLogin = async () => {
         // Handle login logic here
+        try {
+            var user = await authenticateUser(form.values.username, form.values.password);
+            console.log(user);
+            goHome(user);
+            
+        } catch (error) {
+            toggleLoginFail();
+        }
     };
 
-    const handleSignUp = () => {
+    const handleSignUp = async () => {
         // Handle sign up logic here
+        const user: User = {
+            firstName: form.values.firstName,
+            lastName: form.values.lastName,
+            username: form.values.username,
+            password: form.values.password,
+        };
+        console.log(user);
+        try {
+            await addUser(user);
+            form.setFieldValue('password', '');
+            form.setFieldValue('username', '');
+            toggleType();
+
+        } catch (error) {
+            console.log('Failed to add user');
+            toggleRegister();
+        }
     };
 
+    const LogChange = () => {
+        console.log(form.values);
+    };
 
 
     return (
@@ -79,7 +112,7 @@ export const AuthForm: React.FC = () => {
                                 label="Firstname"
                                 placeholder="Your Firstname"
                                 value={form.values.firstName}
-                                onChange={(event) => setFirstName(event.currentTarget.value)}
+                                onChange={(event) => form.setFieldValue('firstName', event.currentTarget.value)}
                             />
                         )}
                         {type === 'Sign Up' && (
@@ -87,7 +120,7 @@ export const AuthForm: React.FC = () => {
                                 label="Lastname"
                                 placeholder="Your Lastname"
                                 value={form.values.lastName}
-                                onChange={(event) => setLastName(event.currentTarget.value)}
+                                onChange={(event) => form.setFieldValue('lastName', event.currentTarget.value)}
                             />
                         )}
 
@@ -97,22 +130,39 @@ export const AuthForm: React.FC = () => {
                             label="Username"
                             placeholder="Your Username"
                             value={form.values.username}
-                            onChange={(event) => setUsername(event.currentTarget.value)}
+                            onChange={(event) => form.setFieldValue('username', event.currentTarget.value)}
                             error={form.errors.username}
                         />
                         <PasswordInput
                             label="Password"
                             placeholder="Your Password"
                             value={form.values.password}
-                            onChange={(event) => setPassword(event.currentTarget.value)}
+                            onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
                             error={form.errors.password}
                         />
-                        <PasswordInput
-                            label="Confirm Password"
-                            placeholder="Confirm Password"
-                            value={form.values.confirmPassword}
-                            onChange={(event) => setConfirmPassword(event.currentTarget.value)}
-                        />
+
+
+
+                        {type === 'Sign Up' && (
+                            <PasswordInput
+                                label="Confirm Password"
+                                placeholder="Confirm Password"
+                                value={form.values.confirmPassword}
+                                onChange={(event) => form.setFieldValue('confirmPassword', event.currentTarget.value)}
+                            />)}
+
+
+
+                        {type === 'Login' && loginFail === true && (
+                            <Anchor ta="center" c="red" size="xs">
+                                Login Failed. Try Again
+                            </Anchor>
+                        )}
+                        {type === 'Sign Up' && registerFail === true && (
+                            <Anchor ta="center" c="red" size="xs">
+                                Username already used. Try Again
+                            </Anchor>
+                        )}
                     </Stack>
 
 
@@ -121,7 +171,7 @@ export const AuthForm: React.FC = () => {
                         <Button type="submit" radius="sm"  >
                             {type}
                         </Button>
-                        <Anchor ta="center" component="button" type="button" c="dimmed" onClick={() => toggle()} size="xs">
+                        <Anchor ta="center" component="button" type="button" c="dimmed" onClick={() => { toggleType(); LogChange(); }} size="xs">
                             {type === 'Login' ? 'Create an account' : 'Already have an account?'}
                         </Anchor>
                     </Stack>

@@ -1,11 +1,11 @@
 // Front-end user model
 
 export interface User {
-  id: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  password: string;
+  id?: string;
+  username?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
 }
 
 export interface Account {

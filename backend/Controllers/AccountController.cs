@@ -25,13 +25,13 @@ public class AccountController : ControllerBase
         return await _accountService.GetAll();
     }
 
-    [HttpGet("User, {id}", Name = "GetAccountsByUser")]
+    [HttpGet("User,{id}", Name = "GetAccountsByUser")]
     public async Task<IEnumerable<Account>> GetByUser(Guid id)
     {
         return await _accountService.GetAllByUserId(id);
     }
 
-    [HttpGet("Account, {id}", Name = "GetAccountById")]
+    [HttpGet("Account,{id}", Name = "GetAccountById")]
     public async Task<ActionResult<Account>> GetById(Guid id)
     {
         try

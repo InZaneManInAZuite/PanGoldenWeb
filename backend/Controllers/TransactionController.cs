@@ -26,13 +26,13 @@ public class TransactionController : ControllerBase
         return await _transactionService.GetAll();
     }
 
-    [HttpGet("Account, {id}", Name = "GetTransactionsByAccount")]
+    [HttpGet("Account,{id}", Name = "GetTransactionsByAccount")]
     public async Task<IEnumerable<Transaction>> GetByAccount(Guid id)
     {
         return await _transactionService.GetAllByAccountId(id);
     }
 
-    [HttpGet("Transaction, {id}", Name = "GetTransactionById")]
+    [HttpGet("Transaction,{id}", Name = "GetTransactionById")]
     public async Task<ActionResult<Transaction>> GetById(Guid id)
     {
         try

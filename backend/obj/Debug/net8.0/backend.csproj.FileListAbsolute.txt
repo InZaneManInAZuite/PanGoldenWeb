@@ -280,3 +280,4 @@ C:\Users\toshi\Source\CodingProjects\PanGoldenWeb\backend\obj\Debug\net8.0\refin
 C:\Users\toshi\Source\CodingProjects\PanGoldenWeb\backend\obj\Debug\net8.0\backend.pdb
 C:\Users\toshi\Source\CodingProjects\PanGoldenWeb\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\toshi\Source\CodingProjects\PanGoldenWeb\backend\obj\Debug\net8.0\ref\backend.dll
+C:\Users\toshi\Source\CodingProjects\PanGoldenWeb\backend\bin\Debug\net8.0\Newtonsoft.Json.dll

@@ -112,3 +112,10 @@ tsc
     -noOmitOnError
     -target <target("ES2015")>
 tsc --init
+
+
+## Notes
+
+Difference between arrow function and regular functions in javascript
+
+Arrow Function - 

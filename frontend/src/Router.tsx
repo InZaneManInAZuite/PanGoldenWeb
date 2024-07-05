@@ -3,12 +3,12 @@ import { HomePage } from './Pages/Home.page';
 import { AuthPage } from './Pages/Auth.page';
 import { SettingsPage } from './Pages/Settings.page';
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/Home',
     element: <HomePage />,
   },{
-    path: '/Authenticate',
+    path: '/',
     element: <AuthPage />,
   },{
     path: '/Settings',
