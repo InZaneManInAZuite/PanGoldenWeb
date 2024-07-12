@@ -38,9 +38,9 @@ public class AccountController : ControllerBase
         {
             return Ok(await _accountService.GetById(id));
         }
-        catch (PanGoldenException e)
+        catch (PanGoldenException)
         {
-            return NotFound(e.Message);
+            return NotFound();
         }
     }
 
@@ -54,9 +54,9 @@ public class AccountController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e.message);
-            if (e.ErrorCode == 400) return BadRequest(e.message);
-            if (e.ErrorCode == 500) return StatusCode(500, e.message);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 400) return BadRequest();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
@@ -71,9 +71,9 @@ public class AccountController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e.message);
-            if (e.ErrorCode == 400) return BadRequest(e.message);
-            if (e.ErrorCode == 500) return StatusCode(500, e.message);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 400) return BadRequest();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
@@ -88,8 +88,8 @@ public class AccountController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e.message);
-            if (e.ErrorCode == 500) return StatusCode(500, e.message);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }

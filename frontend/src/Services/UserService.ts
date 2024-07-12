@@ -1,8 +1,7 @@
 // Front end service for user related operations
-
-import React, { useState } from 'react';
 import config from '../Config';
 import { User } from '../Models/PanGoldenModels';
+import { isFailure } from './ServiceUtils';
 
 // Get all students
 export const getAllUsers = async (): Promise<User[]> => {
@@ -18,15 +17,21 @@ export const getUserByUsername = async (username: string): Promise<User> => {
 export const getUserById = async (id: string): Promise<User> => {
     const response = await fetch(`${config.userApiUrl}/Id,${id}`);
     return await response.json();
-} 
+}
 
 export const authenticateUser = async (username: string, password: string): Promise<User> => {
     const response = await fetch(`${config.userApiUrl}/Auth,${username},${password}`);
-    if (!response.ok) {
-        console.log('Authenticator goes to check if response is ok');
-        throw new Error('Invalid username or password');
+    var element = await response.json();
+
+    if (isFailure(response)) {
+        throw new Error(element.message);
     }
-    return await response.json();
+
+    localStorage.setItem('user', JSON.stringify(element));
+    localStorage.setItem('token', element.token);
+    localStorage.setItem('page', 'accounts');
+
+    return element;
 }
 
 export const addUser = async (user: User): Promise<User> => {
@@ -37,7 +42,14 @@ export const addUser = async (user: User): Promise<User> => {
         },
         body: JSON.stringify(user),
     });
-    return await response.json();
+
+    var element = await response.json();
+
+    if (isFailure(response)) {
+        throw new Error(element.message);
+    }
+
+    return element;
 }
 
 export const updateUser = async (user: User): Promise<User> => {
@@ -48,12 +60,25 @@ export const updateUser = async (user: User): Promise<User> => {
         },
         body: JSON.stringify(user),
     });
-    return await response.json();
+    var element = await response.json();
+
+    if (isFailure(response)) {
+        throw new Error(element.message);
+    }
+
+    return element;
 }
 
 export const deleteUser = async (id: string): Promise<void> => {
     const response = await fetch(`${config.userApiUrl}/${id}`, {
         method: 'DELETE',
     });
-    return await response.json();
+
+    var element = await response.json();
+
+    if (isFailure(response)) {
+        throw new Error(element.message);
+    }
+
+    return element;
 } 

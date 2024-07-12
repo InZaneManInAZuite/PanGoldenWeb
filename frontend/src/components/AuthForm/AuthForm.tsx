@@ -7,16 +7,18 @@ import { useForm } from '@mantine/form';
 import classes from './AuthForm.module.css';
 
 import { useToggle } from '@mantine/hooks';
-import { redirect } from 'react-router-dom';
 
 import { User } from '../../Models/PanGoldenModels';
 import { authenticateUser, addUser } from '../../Services/UserService';
+
+import { useNavigate } from 'react-router-dom';
 
 export const AuthForm: React.FC = () => {
 
     const [type, toggleType] = useToggle(['Login', 'Sign Up']);
     const [loginFail, toggleLoginFail] = useToggle([false, true]);
     const [registerFail, toggleRegister] = useToggle([false, true]);
+    const navigate = useNavigate();
 
 
     const form = useForm({
@@ -51,19 +53,18 @@ export const AuthForm: React.FC = () => {
         }
     });
 
-    const goHome = (user: User) => {
-        return redirect('/Home');
-    }
-
     const handleLogin = async () => {
         // Handle login logic here
         try {
             var user = await authenticateUser(form.values.username, form.values.password);
-            console.log(user);
-            goHome(user);
+            console.log("User successfully logged in");
+            navigate('/Account');
             
         } catch (error) {
-            toggleLoginFail();
+            console.log("User failed to log in");
+            if (loginFail === false) {
+                toggleLoginFail();
+            }
         }
     };
 
@@ -78,18 +79,25 @@ export const AuthForm: React.FC = () => {
         console.log(user);
         try {
             await addUser(user);
-            form.setFieldValue('password', '');
-            form.setFieldValue('username', '');
+            ClearForm();
             toggleType();
+            console.log("User successfully registered");
 
         } catch (error) {
-            console.log('Failed to add user');
-            toggleRegister();
+            console.log("User failed to register");
+            if (registerFail === false) {
+                toggleRegister();
+            }
         }
     };
 
-    const LogChange = () => {
-        console.log(form.values);
+    const ClearForm = () => {
+        // Clear form fields
+        form.setFieldValue('password', '');
+        form.setFieldValue('username', '');
+        form.setFieldValue('firstName', '');
+        form.setFieldValue('lastName', '');
+        form.setFieldValue('confirmPassword', '');
     };
 
 
@@ -171,7 +179,7 @@ export const AuthForm: React.FC = () => {
                         <Button type="submit" radius="sm"  >
                             {type}
                         </Button>
-                        <Anchor ta="center" component="button" type="button" c="dimmed" onClick={() => { toggleType(); LogChange(); }} size="xs">
+                        <Anchor ta="center" component="button" type="button" c="dimmed" onClick={() => { toggleType(); }} size="xs">
                             {type === 'Login' ? 'Create an account' : 'Already have an account?'}
                         </Anchor>
                     </Stack>

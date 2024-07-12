@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Models;
 using backend.Services;
 using backend.Exceptions;
-using Newtonsoft.Json;
 namespace backend.Controllers;
 
 [ApiController]
@@ -32,9 +31,9 @@ public class UserController : ControllerBase
         { 
             return Ok(await _userService.GetByUsername(username));
         }
-        catch (PanGoldenException e)
+        catch (PanGoldenException)
         {
-            return NotFound(e);
+            return NotFound();
         }
     }
 
@@ -45,9 +44,9 @@ public class UserController : ControllerBase
         {
             return Ok(await _userService.GetById(id));
         }
-        catch (PanGoldenException e)
+        catch (PanGoldenException)
         {
-            return NotFound(e);
+            return NotFound();
         }
     }
 
@@ -58,9 +57,9 @@ public class UserController : ControllerBase
             User user = await _userService.Authenticate(username, password);
             return user;
         }
-        catch (PanGoldenException e)
+        catch (PanGoldenException)
         {
-            return NotFound(e);
+            return NotFound();
         }
     }
 
@@ -74,8 +73,8 @@ public class UserController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 400) return BadRequest(e);
-            if (e.ErrorCode == 500) return StatusCode(500, e);
+            if (e.ErrorCode == 400) return BadRequest();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
@@ -89,9 +88,9 @@ public class UserController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e);
-            if (e.ErrorCode == 400) return BadRequest(e);
-            if (e.ErrorCode == 500) return StatusCode(500, e);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 400) return BadRequest();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
@@ -106,8 +105,8 @@ public class UserController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e);
-            if (e.ErrorCode == 500) return StatusCode(500, e);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }

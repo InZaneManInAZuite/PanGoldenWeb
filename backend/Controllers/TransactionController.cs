@@ -6,6 +6,12 @@ using backend.Services;
 using backend.Exceptions;
 namespace backend.Controllers;
 
+class ApiResponse {
+    public string? Message { get; set; }
+    public int ErrorCode { get; set; } = 404;
+    public bool ErrorStatus { get; set; } = true;
+}
+
 [ApiController]
 [Route("[controller]")] 
 public class TransactionController : ControllerBase
@@ -41,7 +47,9 @@ public class TransactionController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            return NotFound(e.Message);
+            ApiResponse failed = new ApiResponse();
+            failed.Message = e.Message;
+            return NotFound(failed);
         }
     }
 
@@ -55,9 +63,9 @@ public class TransactionController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e.Message);
-            if (e.ErrorCode == 400) return BadRequest(e.Message);
-            if (e.ErrorCode == 500) return StatusCode(500, e.Message);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 400) return BadRequest();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
@@ -71,9 +79,9 @@ public class TransactionController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e.Message);
-            if (e.ErrorCode == 400) return BadRequest(e.Message);
-            if (e.ErrorCode == 500) return StatusCode(500, e.Message);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 400) return BadRequest();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
@@ -88,8 +96,8 @@ public class TransactionController : ControllerBase
         }
         catch (PanGoldenException e)
         {
-            if (e.ErrorCode == 404) return NotFound(e.Message);
-            if (e.ErrorCode == 500) return StatusCode(500, e.Message);
+            if (e.ErrorCode == 404) return NotFound();
+            if (e.ErrorCode == 500) return StatusCode(500);
             return NotFound();
         }
     }
