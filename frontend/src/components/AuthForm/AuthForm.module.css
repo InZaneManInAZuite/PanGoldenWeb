@@ -8,7 +8,7 @@
     margin-top: 20px;
     
     @media (max-width: 100vh) {
-        max-width: 100%;
+        max-width: 400px;
         margin-top: 0;
     }
 }

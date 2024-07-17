@@ -3,7 +3,8 @@
 
 import { useViewportSize, useDisclosure } from '@mantine/hooks';
 
-import { AuthForm } from '../AuthForm/AuthForm';
+import { Feed } from '../Feed/Feed';
+import { HeaderPanel } from '../HeaderPanel/HeaderPanel';
 import { SidePanel } from '../SidePanel/SidePanel';
 
 import classes from './PageCont.module.css';
@@ -18,10 +19,10 @@ export const PageCont = () => {
     return (
         <Flex className={classes.flexCont}>
             {isLandScape && (<SidePanel/>)}
-            {!isLandScape && (<AuthForm/>)}
+            {!isLandScape && (<HeaderPanel/>)}
 
             <div className={classes.feed}>
-                <AuthForm />
+                <Feed />
             </div>
 
         </Flex>

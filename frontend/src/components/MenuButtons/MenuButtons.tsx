@@ -7,6 +7,7 @@ import {
     IconReportAnalytics as IconAnalytics,
 
 } from '@tabler/icons-react';
+import { useState } from 'react';
 import classes from './MenuButtons.module.css';
 
 interface NavbarLinkProps {
@@ -33,4 +34,23 @@ const menuOptions = [
     { icon: IconAnalytics, label: 'Analytics' },
 ];
 
-export function MenuButton() {}
+export const MenuButtons = () =>    {
+
+    const [active, setActive] = useState('Accounts');
+    const links = menuOptions.map((menuOption) => (
+        <NavbarLink
+            {...menuOption}
+            key={menuOption.label}
+            active={menuOption.label === active}
+            onClick={() => {
+                setActive(menuOption.label);
+                localStorage.setItem('page', menuOption.label);
+                dispatchEvent(new Event('pageChange'));
+            }}
+        />
+    ));
+
+    return ( 
+        links
+    );
+}
