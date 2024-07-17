@@ -29,7 +29,7 @@ export const authenticateUser = async (username: string, password: string): Prom
 
     localStorage.setItem('user', JSON.stringify(element));
     localStorage.setItem('token', element.token);
-    localStorage.setItem('page', 'accounts');
+    localStorage.setItem('page', 'Accounts');
 
     return element;
 }

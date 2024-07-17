@@ -1,47 +1,48 @@
 .navbar {
-    width: rem(200px);
-    height: rem(700);
-    padding: var(--mantine-spacing-md);
-    display: flex;
-    flex-direction: column;
-    border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  width: fit-content;
+  height: 100vh;
+  padding: var(--mantine-spacing-md);
+  display: flex;
+  flex-direction: column;
+  border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+}
+
+.navbarMain {
+  flex: 1;
+  margin-top: rem(50px);
+}
+
+.link {
+  width: rem(150);
+  height: rem(50px);
+  border-radius: var(--mantine-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  padding: 0 var(--mantine-spacing-md);
+
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
   }
-  
-  .navbarMain {
-    flex: 1;
-    margin-top: rem(50px);
-  }
-  
-  .link {
-    width: rem(150);
-    height: rem(50px);
-    border-radius: var(--mantine-radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-    padding: 0 var(--mantine-spacing-md);
-  
+
+  &[data-active] {
+
+    &,
     &:hover {
-      background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
-    }
-  
-    &[data-active] {
-      &,
-      &:hover {
-        background-color: var(--mantine-color-blue-light);
-        color: var(--mantine-color-blue-light-color);
-      }
+      background-color: var(--mantine-color-blue-light);
+      color: var(--mantine-color-blue-light-color);
     }
   }
+}
 
-  .label {
-    margin-left: var(--mantine-spacing-sm);
-    padding-bottom: rem(1);
-    width: rem(100);
-  }
+.label {
+  margin-left: var(--mantine-spacing-sm);
+  padding-bottom: rem(1);
+  width: rem(100);
+}
 
-  .icon {
-    width: rem(20);
-    height: rem(20);
-  }
+.icon {
+  width: rem(20);
+  height: rem(20);
+}

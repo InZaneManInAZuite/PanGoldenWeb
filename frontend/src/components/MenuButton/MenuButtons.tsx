@@ -1,8 +1,5 @@
-import { useState } from 'react';
-import { Center, UnstyledButton, Stack, rem, Text } from '@mantine/core';
+import { UnstyledButton, Text } from '@mantine/core';
 import {
-    IconZodiacCancer as IconLogo,
-
     IconUser as IconUser,
     IconSettings as IconSettings,
     IconBuildingBank as IconAccounts,
@@ -10,7 +7,7 @@ import {
     IconReportAnalytics as IconAnalytics,
 
 } from '@tabler/icons-react';
-import classes from './SidePanel.module.css';
+import classes from './MenuButtons.module.css';
 
 interface NavbarLinkProps {
     icon: typeof IconUser;
@@ -36,37 +33,4 @@ const menuOptions = [
     { icon: IconAnalytics, label: 'Analytics' },
 ];
 
-export function SidePanel() {
-    const [active, setActive] = useState('Accounts');
-
-    const links = menuOptions.map((menuOption) => (
-        <NavbarLink
-            {...menuOption}
-            key={menuOption.label}
-            active={menuOption.label === active}
-            onClick={() => {
-                setActive(menuOption.label);
-                localStorage.setItem('page', menuOption.label);
-            }}
-        />
-    ));
-
-
-
-    return (
-        <nav className={classes.navbar}>
-            <Center>
-                <IconLogo type="mark" size={30} />
-            </Center>
-
-            <div className={classes.navbarMain}>
-                <Stack justify="center" gap={0}>
-                    {links}
-                </Stack>
-            </div>
-        </nav>
-
-
-
-    );
-}
+export function MenuButton() {}

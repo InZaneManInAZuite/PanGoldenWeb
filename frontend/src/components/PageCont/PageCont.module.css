@@ -1,0 +1,12 @@
+.flexCont {
+    flex-direction: row;
+    max-width: 100vw;
+
+    @media(max-width: 100vh) {
+        flex-direction: column;
+    }
+}
+
+.feed {
+    flex-basis: 100%;
+}

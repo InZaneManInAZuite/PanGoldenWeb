@@ -1,10 +1,10 @@
 // The main page for the application
 
 import React from 'react';
-import { SidePanel } from '../components/SidePanel/SidePanel';
+import { PageCont } from '../components/PageCont/PageCont';
 
 export const MainPage: React.FC = () => {
     return(
-        < SidePanel />
+        <PageCont />
     );
 };
