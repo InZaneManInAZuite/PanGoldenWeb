@@ -1,10 +1,12 @@
 // The main page for the application
 
 import React from 'react';
-import { PageCont } from '../components/PageCont/PageCont';
+import { Navigator } from '../components/Navigator/Navigator';
 
 export const MainPage: React.FC = () => {
-    return(
-        <PageCont />
+    return (
+        <Navigator>
+            <h1> Main Page Placeholder</h1>
+        </Navigator>
     );
 };

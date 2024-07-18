@@ -1,10 +1,12 @@
 // The main page for the application
 
 import React from 'react';
-import { SidePanel } from '../components/SidePanel/SidePanel';
+import { Navigator } from '../components/Navigator/Navigator';
 
 export const UserPage: React.FC = () => {
-    return(
-        < SidePanel />
+    return (
+        <Navigator>
+            <h1> User Page Placeholder</h1>
+        </Navigator>
     );
 };

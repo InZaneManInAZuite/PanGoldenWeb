@@ -17,7 +17,7 @@ export const HeaderPanel = () => {
     addEventListener('pageChange', close);
 
     return (
-        <header>
+        <header className={classes.nav}>
             <Drawer opened={drawerOpened} onClose={close}>
                 <Center>
                     <IconLogo type="mark" size={30} />

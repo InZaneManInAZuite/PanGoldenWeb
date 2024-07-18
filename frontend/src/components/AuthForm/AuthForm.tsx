@@ -56,9 +56,9 @@ export const AuthForm: React.FC = () => {
     const handleLogin = async () => {
         // Handle login logic here
         try {
-            var user = await authenticateUser(form.values.username, form.values.password);
+            await authenticateUser(form.values.username, form.values.password);
             console.log("User successfully logged in");
-            navigate('/Account');
+            navigate('/Accounts');
             
         } catch (error) {
             console.log("User failed to log in");

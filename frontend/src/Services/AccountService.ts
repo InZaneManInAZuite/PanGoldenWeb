@@ -12,7 +12,7 @@ export const getAllAccounts = async (): Promise<Account[]> => {
 // Get all accounts by user
 export const getAccountsByUser = async (userId: string): Promise<Account[]> => {
     const response = await fetch(`${config.accountApiUrl}/User,${userId}`);
-    return await response.json();
+    return await response.json() as Account[];
 }
 
 // Get account by id

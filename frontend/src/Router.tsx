@@ -16,8 +16,23 @@ export const router = createBrowserRouter([
     path: '/Auth',
     element: <AuthPage />,
   },{
-    path: '/',
+    path: '/Main',
     element: <MainPage />,
+  },{
+    path: '/Accounts',
+    element: <AccountPage />,
+  },{
+    path: '/User',
+    element: <UserPage />,
+  },{
+    path: '/Settings',
+    element: <SettingsPage />,
+  },{
+    path: '/Analytics',
+    element: <AnalyticsPage />,
+  },{
+    path: '/Transactions',
+    element: <TransactionsPage />,
   }
 ]);
 

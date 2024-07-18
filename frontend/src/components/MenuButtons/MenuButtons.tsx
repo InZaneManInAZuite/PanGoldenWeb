@@ -9,6 +9,7 @@ import {
 } from '@tabler/icons-react';
 import { useState } from 'react';
 import classes from './MenuButtons.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface NavbarLinkProps {
     icon: typeof IconUser;
@@ -36,7 +37,9 @@ const menuOptions = [
 
 export const MenuButtons = () =>    {
 
-    const [active, setActive] = useState('Accounts');
+    const navigate = useNavigate();
+
+    const [active, setActive] = useState(localStorage.getItem('page') || 'Accounts');
     const links = menuOptions.map((menuOption) => (
         <NavbarLink
             {...menuOption}
@@ -45,7 +48,7 @@ export const MenuButtons = () =>    {
             onClick={() => {
                 setActive(menuOption.label);
                 localStorage.setItem('page', menuOption.label);
-                dispatchEvent(new Event('pageChange'));
+                navigate('/' + menuOption.label);
             }}
         />
     ));

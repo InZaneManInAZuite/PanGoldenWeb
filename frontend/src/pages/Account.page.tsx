@@ -1,10 +1,13 @@
 // The main page for the application
 
 import React from 'react';
-import { SidePanel } from '../components/SidePanel/SidePanel';
+import { Navigator } from '../components/Navigator/Navigator';
+import { AccountPageComp } from '../components/AccountPageComp/AccountPageComp';
 
 export const AccountPage: React.FC = () => {
-    return(
-        < SidePanel />
+    return (
+        <Navigator>
+            <AccountPageComp />
+        </Navigator>
     );
 };
