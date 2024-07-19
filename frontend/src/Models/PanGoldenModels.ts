@@ -9,20 +9,21 @@ export interface User {
 }
 
 export interface Account {
-  id: string;
-  name: string;
-  untrackedBalance: number;
-  userId: string;
-  user: User;
+  id?: string;
+  name?: string;
+  untrackedBalance?: number;
+  userId?: string;
+  user?: User;
+  balance?: number;
 }
 
 export interface Transaction {
-  id: string;
-  type: TransactionType;
-  description: string;
-  date: Date;
-  accountId: string;
-  account: Account;
+  id?: string;
+  type?: TransactionType;
+  description?: string;
+  date?: Date;
+  accountId?: string;
+  account?: Account;
 }
 
 export enum TransactionType {
