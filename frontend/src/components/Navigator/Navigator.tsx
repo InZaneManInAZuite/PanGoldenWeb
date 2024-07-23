@@ -5,7 +5,7 @@ import { HeaderPanel } from '../HeaderPanel/HeaderPanel';
 import { SidePanel } from '../SidePanel/SidePanel';
 
 import classes from './Navigator.module.css';
-import { Flex } from '@mantine/core';
+import { Flex, ScrollArea } from '@mantine/core';
 
 export const Navigator = ({ children }: { children: ReactElement }) => {
 
@@ -13,9 +13,13 @@ export const Navigator = ({ children }: { children: ReactElement }) => {
         <Flex className={classes.flexCont}>
             <SidePanel />
             <HeaderPanel />
+
+            <ScrollArea className={classes.scrollArea}>
+                
             <div className={classes.feed}>
                 {children}
             </div>
+            </ScrollArea>
         </Flex>
     );
 };

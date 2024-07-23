@@ -1,9 +1,10 @@
-import { Card, Title, Text, Stack, UnstyledButton, Group } from '@mantine/core';
+import { Card, Title, Text, Stack, UnstyledButton, Group, Divider } from '@mantine/core';
 import { User, Account } from '../../Models/PanGoldenModels';
 import { getAccountsByUser } from '../../Services/AccountService';
 import { AccountCard } from '../AccountCard/AccountCard';
 import { IconPlus } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import classes from './AccountPageComp.module.css';
 
@@ -12,6 +13,8 @@ export const AccountPageComp = () => {
     const [accounts, setAccounts] = useState<Account[]>([])
 
     const activeUser: User = JSON.parse(localStorage.getItem('user') as string) as User
+
+    const navigate = useNavigate();
 
     const getAccounts = async () => {
         if (activeUser.id === undefined) return [];
@@ -39,11 +42,13 @@ export const AccountPageComp = () => {
         <Stack>
             <Title order={1}>Accounts</Title>
 
-            <Stack gap="md" className={classes.accountCard}>
+            <Divider />
+
+            <Group gap="sm" mt="xl" className={classes.accountCard}>
                 {accounts.map((account, index) => {
                     return <AccountCard key={index} account={account} />
                 })}
-            </Stack>
+            </Group>
 
             {accounts.length === 0 && (
                 <div className={classes.noAccounts}>
@@ -51,17 +56,18 @@ export const AccountPageComp = () => {
                 </div>
             )}
 
-            <UnstyledButton>
-                <Card shadow="xs" padding="md" radius="md"  className={classes.newAccount}>
-                    <Group>
-                        <Title order={2}>Add Account</Title>
-                        <IconPlus size={24} />
-                    </Group>
+            <Group justify="center">
+                <UnstyledButton onClick={() => navigate('/Accounts/Add')} mt="lg">
+                    <Card shadow="xs" padding="md" radius="md" className={classes.newAccount}>
+                        <Group>
+                            <Title order={2}>Add Account</Title>
+                            <IconPlus size={24} />
+                        </Group>
 
-                </Card>
+                    </Card>
 
-            </UnstyledButton>
-
+                </UnstyledButton>
+            </Group>
 
 
 

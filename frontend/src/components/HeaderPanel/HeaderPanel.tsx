@@ -30,7 +30,7 @@ export const HeaderPanel = () => {
                 </div>
             </Drawer>
 
-            <Card className={classes.header}>
+            <Card className={classes.header} shadow='md'>
                 <IconLogo type="mark" size={30} />
                 <Title order={2} className={classes.logoText}>PanGolden</Title>
 

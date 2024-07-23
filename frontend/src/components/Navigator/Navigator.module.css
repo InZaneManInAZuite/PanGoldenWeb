@@ -10,4 +10,17 @@
 .feed {
     flex-basis: 100%;
     padding: var(--mantine-spacing-lg);
+
+    @media (max-width: 450px) {
+        padding: var(--mantine-spacing-sm);
+    }
+}
+
+.scrollArea {
+    
+    height: 100vh;
+    width: 100vw;
+    @media (max-width: 450px) {
+        height: calc(100vh - 75px);
+    }
 }

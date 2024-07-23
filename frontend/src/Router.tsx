@@ -3,6 +3,7 @@ import { HomePage } from './Pages/Home.page';
 import { AuthPage } from './Pages/Auth.page';
 import { SettingsPage } from './Pages/Settings.page';
 import { AccountPage } from './Pages/Account.page';
+import { AddAccountPage } from './Pages/AddAccount.page';
 import { UserPage } from './Pages/User.page';
 import { AnalyticsPage } from './Pages/Analytics.page';
 import { TransactionsPage } from './Pages/Transactions.page';
@@ -21,6 +22,9 @@ export const router = createBrowserRouter([
   },{
     path: '/Accounts',
     element: <AccountPage />,
+  },{
+    path: '/Accounts/Add',
+    element: <AddAccountPage />,
   },{
     path: '/User',
     element: <UserPage />,

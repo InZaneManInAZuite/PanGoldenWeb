@@ -1,13 +1,14 @@
 .card {
-    width: 50vw;
+    width: 300px;
     height: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #fff;
+    background-color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-6));
 
-    @media (max-width: 100vh) {
-        width: 100vw;
+    @media (max-width: 325px) {
+        width: calc(100vw - var(--mantine-spacing-lg));
+        max-width: 100vw;
         flex-direction: column;
     }
 }
