@@ -2,6 +2,7 @@
 import config from '../Config';
 import { User } from '../Models/PanGoldenModels';
 import { isFailure } from './ServiceUtils';
+import { store } from '../App/Store';
 
 // Get all students
 export const getAllUsers = async (): Promise<User[]> => {
@@ -27,9 +28,8 @@ export const authenticateUser = async (username: string, password: string): Prom
         throw new Error(element.message);
     }
 
-    localStorage.setItem('user', JSON.stringify(element));
-    localStorage.setItem('token', element.token);
-    localStorage.setItem('page', 'Accounts');
+    store.dispatch({ type: 'user/setUser', payload: element });
+    store.dispatch({ type: 'page/setPage', payload: 'Accounts' });
 
     return element;
 }

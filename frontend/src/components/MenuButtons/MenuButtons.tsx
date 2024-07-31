@@ -10,6 +10,7 @@ import {
 import { useState } from 'react';
 import classes from './MenuButtons.module.css';
 import { useNavigate } from 'react-router-dom';
+import { store } from '../../App/Store';
 
 interface NavbarLinkProps {
     icon: typeof IconUser;
@@ -39,7 +40,7 @@ export const MenuButtons = () =>    {
 
     const navigate = useNavigate();
 
-    const [active, setActive] = useState(localStorage.getItem('page') || 'Accounts');
+    const [active, setActive] = useState(store.getState().page.page || '');
     const links = menuOptions.map((menuOption) => (
         <NavbarLink
             {...menuOption}
@@ -47,7 +48,7 @@ export const MenuButtons = () =>    {
             active={menuOption.label === active}
             onClick={() => {
                 setActive(menuOption.label);
-                localStorage.setItem('page', menuOption.label);
+                store.dispatch({ type: 'Page/setPage', payload: menuOption.label });
                 navigate('/' + menuOption.label);
             }}
         />

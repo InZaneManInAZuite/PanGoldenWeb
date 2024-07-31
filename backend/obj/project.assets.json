@@ -4981,24 +4981,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\toshi\\.nuget\\packages\\": {}
+    "C:\\Users\\toshi\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\toshi\\source\\repos\\PanGoldenWeb\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\toshi\\source\\repos\\PanGoldenWeb\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\toshi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\toshi\\Source\\CodingProjects\\PanGoldenWeb\\backend\\obj\\",
+      "outputPath": "C:\\Users\\toshi\\source\\repos\\PanGoldenWeb\\backend\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\toshi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\toshi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5068,7 +5075,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

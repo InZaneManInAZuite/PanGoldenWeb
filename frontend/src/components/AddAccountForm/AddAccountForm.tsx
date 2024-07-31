@@ -5,6 +5,7 @@ import { User, Account } from '../../Models/PanGoldenModels';
 import { addAccount } from '../../Services/AccountService';
 import { useNavigate } from 'react-router-dom';
 import classes from './AddAccountForm.module.css';
+import { store } from '../../App/Store';
 
 export const AddAccountForm: React.FC = () => {
 
@@ -23,7 +24,8 @@ export const AddAccountForm: React.FC = () => {
     const [nameExists, toggleNameExists] = useToggle([false, true]);
     const navigate = useNavigate();
 
-    const user: User = JSON.parse(localStorage.getItem('user') || '{}');
+    const user: User = store.getState().user as User;
+    
     if (!user) {
         navigate('/Auth');
     }

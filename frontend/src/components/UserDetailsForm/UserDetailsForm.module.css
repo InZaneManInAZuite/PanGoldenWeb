@@ -1,0 +1,12 @@
+.editIcons {
+    align-self: right;
+}
+
+.userCard {
+    width: 450px;
+    align-self: center;
+
+    @media (max-width: 700px) {
+        width: 100%;
+    }
+}

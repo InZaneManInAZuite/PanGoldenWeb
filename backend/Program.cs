@@ -6,12 +6,13 @@ using backend.Services;
 using backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // add cors
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins, policy => {
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
         policy.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod();
     });
 });
@@ -24,7 +25,10 @@ builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("PanGoldenWeb") ?? "Server=(local);Database=PanGoldenWeb;Trusted_Connection=True;TrustServerCertificate=True;";
 
-builder.Services.AddDbContext<PanGoldenContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<PanGoldenContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 // Add services to the container.
 

@@ -1,0 +1,9 @@
+.accountCardList {
+    display: flex;
+    justify-content: center;
+}
+
+.noAccount {
+    align-items: center;
+    justify-content: center;
+}
