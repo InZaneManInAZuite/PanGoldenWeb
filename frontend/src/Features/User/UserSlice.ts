@@ -3,25 +3,25 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        username: undefined,
-        firstName: undefined,
-        lastName: undefined,
-        id: undefined,
+        username: '',
+        firstName: '',
+        lastName: '',
+        id: '',
         loggedIn: false
     },
     reducers: {
         clearUser: (state) => {
-            state.username = undefined;
-            state.firstName = undefined;
-            state.lastName = undefined;
-            state.id = undefined;
+            state.username = '';
+            state.firstName = '';
+            state.lastName = '';
+            state.id = '';
             state.loggedIn = false;
         },
         setUser: (state, action) => {
-            state.username = action.payload.username;
-            state.firstName = action.payload.firstName;
-            state.lastName = action.payload.lastName;
-            state.id = action.payload.id;
+            if (action.payload.username !== undefined) state.username = action.payload.username;
+            if (action.payload.firstName !== undefined) state.firstName = action.payload.firstName;
+            if (action.payload.lastName !== undefined) state.lastName = action.payload.lastName;
+            if (action.payload.id !== undefined) state.id = action.payload.id;
             state.loggedIn = true;
         }
     }

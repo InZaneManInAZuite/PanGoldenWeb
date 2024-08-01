@@ -1,7 +1,6 @@
 import { UnstyledButton, Text } from '@mantine/core';
 import {
     IconUser as IconUser,
-    IconSettings as IconSettings,
     IconBuildingBank as IconAccounts,
     IconArrowsLeftRight as IconTransactions,
     IconReportAnalytics as IconAnalytics,
@@ -30,7 +29,6 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 
 const menuOptions = [
     { icon: IconUser, label: 'User' },
-    { icon: IconSettings, label: 'Settings' },
     { icon: IconAccounts, label: 'Accounts' },
     { icon: IconTransactions, label: 'Transactions' },
     { icon: IconAnalytics, label: 'Analytics' },

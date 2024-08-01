@@ -2,7 +2,6 @@
 import config from '../Config';
 import { User } from '../Models/PanGoldenModels';
 import { isFailure } from './ServiceUtils';
-import { store } from '../App/Store';
 
 // Get all students
 export const getAllUsers = async (): Promise<User[]> => {
@@ -27,9 +26,6 @@ export const authenticateUser = async (username: string, password: string): Prom
     if (isFailure(response)) {
         throw new Error(element.message);
     }
-
-    store.dispatch({ type: 'user/setUser', payload: element });
-    store.dispatch({ type: 'page/setPage', payload: 'Accounts' });
 
     return element;
 }
@@ -63,6 +59,7 @@ export const updateUser = async (user: User): Promise<User> => {
     var element = await response.json();
 
     if (isFailure(response)) {
+        if (response.status === 400) throw new Error("User already exists");
         throw new Error(element.message);
     }
 

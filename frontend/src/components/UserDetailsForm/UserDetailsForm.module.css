@@ -1,12 +1,25 @@
-.editIcons {
-    align-self: right;
-}
-
 .userCard {
     width: 450px;
     align-self: center;
 
-    @media (max-width: 700px) {
+    @media (max-width: 675px) {
         width: 100%;
     }
+}
+
+.cardTitle {
+    align-content: center;
+    justify-content: space-between;
+}
+
+.editButton {
+    color: var(--primary-color);
+
+    &:hover {
+        background-color: var(--mantine-color-dark-5);
+    }
+}
+
+.saveButton {
+    width: 100%;
 }
