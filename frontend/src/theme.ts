@@ -22,8 +22,7 @@ export const Theme = createTheme({
     Button: {
       defaultProps: {
         color: 'yellow',
-      },
-      
+      }
     }
   },
 

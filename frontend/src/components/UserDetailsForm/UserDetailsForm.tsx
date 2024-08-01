@@ -1,4 +1,4 @@
-import { Card, Title, Text, Stack, Button, Anchor, Group, Paper, TextInput, UnstyledButton } from '@mantine/core';
+import { Card, Title, Text, Stack, Button, Anchor, Group, TextInput, UnstyledButton } from '@mantine/core';
 import { User } from '../../Models/PanGoldenModels';
 import { store } from '../../App/Store';
 import { IconEdit, IconX } from '@tabler/icons-react';
@@ -11,9 +11,9 @@ import classes from './UserDetailsForm.module.css';
 
 export const UserDetailsForm = () => {
 
-    const username = store.getState().user.username;
-    const firstName = store.getState().user.firstName;
-    const lastName = store.getState().user.lastName;
+    const username : string = store.getState().user.username;
+    const firstName : string = store.getState().user.firstName;
+    const lastName : string = store.getState().user.lastName;
 
     const [saveFail, setSaveFail] = useState(false);
     const [edit, toggleEdit] = useToggle([false, true]);

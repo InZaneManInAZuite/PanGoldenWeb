@@ -8,7 +8,7 @@ import { IconDotsVertical as IconInfo } from '@tabler/icons-react';
 export const AccountCard = ({ account }: { account: Account }) => {
     return (
         <UnstyledButton onClick={() => {}}>
-            <Card shadow="lg" padding="sm" radius="md" className={classes.card}>
+            <Card shadow="lg" padding="sm" radius="md" className={classes.card} withBorder>
                 <Group>
                 <Stack gap="0px">
                     <Title order={3}>{account.name}</Title>

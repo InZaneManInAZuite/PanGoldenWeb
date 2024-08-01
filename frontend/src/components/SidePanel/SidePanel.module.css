@@ -4,7 +4,9 @@
   padding: var(--mantine-spacing-md);
   display: flex;
   flex-direction: column;
-  border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  background-color: var(--mantine-color-yellow-6);
+  color: var(--mantine-color-dark-9);
+  
 
   @media (max-width: 450px) {
     display: none;
@@ -12,6 +14,7 @@
 }
 
 .navbarMain {
+  
   flex: 1;
   margin-top: rem(50px);
 }

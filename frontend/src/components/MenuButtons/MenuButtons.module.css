@@ -5,19 +5,22 @@
     display: flex;
     align-items: center;
     justify-content: left;
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+    color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-dark-5));
     padding: 0 var(--mantine-spacing-md);
   
     &:hover {
-      background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+      background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-4));
+      color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-gray-2));
     }
   
     &[data-active] {
+      background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+      color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-gray-2));
   
       &,
       &:hover {
-        background-color: var(--mantine-color-blue-light);
-        color: var(--mantine-color-blue-light-color);
+        background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+        color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-gray-2));
       }
     }
   }

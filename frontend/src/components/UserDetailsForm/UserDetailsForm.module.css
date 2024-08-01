@@ -13,10 +13,10 @@
 }
 
 .editButton {
-    color: var(--primary-color);
+    background-color: var(--primary-color);
 
     &:hover {
-        background-color: var(--mantine-color-dark-5);
+        background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
     }
 }
 

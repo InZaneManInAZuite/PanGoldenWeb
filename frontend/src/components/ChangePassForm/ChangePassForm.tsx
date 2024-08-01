@@ -1,8 +1,6 @@
-import { Card, Title, Text, Stack, Button, Anchor, Group, Paper, TextInput, UnstyledButton, PasswordInput } from '@mantine/core';
+import { Card, Title, Text, Stack, Button, PasswordInput } from '@mantine/core';
 import { User } from '../../Models/PanGoldenModels';
 import { store } from '../../App/Store';
-import { IconEdit, IconX } from '@tabler/icons-react';
-import { useToggle } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { updateUser, authenticateUser } from '../../Services/UserService';
 import { useState } from 'react';

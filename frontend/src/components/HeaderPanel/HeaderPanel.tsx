@@ -1,6 +1,6 @@
 // Create a disclosure panel that can be opened and closed
 import { useDisclosure } from '@mantine/hooks';
-import { Center, Drawer, Stack, Card, Title } from '@mantine/core';
+import { Center, Drawer, Stack, Card, Title, Overlay } from '@mantine/core';
 
 import {
     IconZodiacCancer as IconLogo,
@@ -18,25 +18,24 @@ export const HeaderPanel = () => {
 
     return (
         <header className={classes.nav}>
-            <Drawer opened={drawerOpened} onClose={close}>
-                <Center>
-                    <IconLogo type="mark" size={30} />
-                </Center>
-
-                <div className={classes.navbarMain}>
-                    <Stack justify="center" gap={0}>
+            <Drawer opened={drawerOpened} onClose={close} >
+                <Overlay className={classes.drawer} >
+                    <Center mt="100">
+                        <IconLogo type="mark" size={60} />
+                    </Center>
+                    <Stack justify="center" gap={0} p="lg">
                         <MenuButtons />
                     </Stack>
-                </div>
+                </Overlay>
+
             </Drawer>
 
-            <Card className={classes.header} shadow='md'>
-                <IconLogo type="mark" size={30} />
+            <Card className={classes.header} radius='0' p="lg">
                 <Title order={2} className={classes.logoText}>PanGolden</Title>
 
-                <div className={classes.headerMenu}>
-                    <IconMenu onClick={open} size={30} />
-                </div>
+                <Card className={classes.headerMenu} shadow="0" p='0'>
+                    <IconMenu onClick={open} size={35} />
+                </Card>
             </Card>
         </header>
     );
