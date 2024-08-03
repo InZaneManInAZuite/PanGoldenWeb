@@ -28,6 +28,7 @@ export interface Transaction {
 }
 
 export enum TransactionType {
-  Gain, Lose, Transfer
+  Gain,
+  Lose,
+  Transfer,
 }
-

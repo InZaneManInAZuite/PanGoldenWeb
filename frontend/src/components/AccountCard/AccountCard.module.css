@@ -1,53 +1,51 @@
 .card {
-    width: 300px;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
-    box-shadow: var(--mantine-shadow-lg);
-    align-items: center;
+  width: 300px;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  box-shadow: var(--mantine-shadow-lg);
+  align-items: center;
 
-    &:hover {
-        box-shadow: var(--mantine-shadow-md);
-    }
+  &:hover {
+    box-shadow: var(--mantine-shadow-md);
+  }
 
-    @media all and (max-width: 350px) {
-        width: calc(100vw - 50px);
-        flex-direction: column;
-    }
+  @media all and (max-width: 350px) {
+    width: calc(100vw - 50px);
+    flex-direction: column;
+  }
 
-    @media all and ((max-width: 550px) and (min-width: 450px)) {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    
+  @media all and ((max-width: 550px) and (min-width: 450px)) {
+    width: 100%;
+    flex-direction: column;
+  }
 }
 
 .content {
-    width: 245px;
-    padding: var(--mantine-padding-md);
+  width: 245px;
+  padding: var(--mantine-padding-md);
 
-    @media all and (max-width: 350px) {
-        width: calc(100vw - 100px);
-    }
+  @media all and (max-width: 350px) {
+    width: calc(100vw - 100px);
+  }
 
-    @media all and ((max-width: 550px) and (min-width: 450px)) {
-        width: calc(100vw - 305px );
-    }
+  @media all and ((max-width: 550px) and (min-width: 450px)) {
+    width: calc(100vw - 305px);
+  }
 }
 
 .allContent {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: 100%;
 }
 
 .info {
-    &:hover {
-        background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-gray-9));
-    }
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-gray-9));
+  }
 }

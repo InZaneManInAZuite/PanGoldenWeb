@@ -7,7 +7,6 @@ import { store, persistor } from './App/Store';
 import { Provider } from 'react-redux';
 import '@mantine/dates/styles.css';
 
-
 export default function App() {
   return (
     <Provider store={store}>
@@ -17,6 +16,5 @@ export default function App() {
         </MantineProvider>
       </PersistGate>
     </Provider>
-
   );
 }

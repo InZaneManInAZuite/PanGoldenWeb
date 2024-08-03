@@ -5,9 +5,9 @@ import { Navigator } from '../components/Navigator/Navigator';
 import { UserPageComp } from '@/components/UserPageComp/UserPageComp';
 
 export const UserPage: React.FC = () => {
-    return (
-        <Navigator>
-            <UserPageComp />
-        </Navigator>
-    );
+  return (
+    <Navigator>
+      <UserPageComp />
+    </Navigator>
+  );
 };

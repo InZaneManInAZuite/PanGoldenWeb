@@ -1,4 +1,4 @@
-// Creates a flex container which would fix the layout of 
+// Creates a flex container which would fix the layout of
 // the page content depending on the screen size
 import { ReactElement } from 'react';
 import { HeaderPanel } from '../HeaderPanel/HeaderPanel';
@@ -11,22 +11,18 @@ import { Flex, ScrollArea } from '@mantine/core';
 import { store } from '../../App/Store';
 
 export const Navigator = ({ children }: { children: ReactElement }) => {
+  if (!store.getState().user.loggedIn) {
+    return <LoggedOutForm />;
+  } // Redirect to login page if not logged in
 
-    if (!store.getState().user.loggedIn) { 
-        return <LoggedOutForm />;
-    };     // Redirect to login page if not logged in
+  return (
+    <Flex className={classes.flexCont}>
+      <SidePanel />
+      <HeaderPanel />
 
-    return (
-        <Flex className={classes.flexCont}>
-            <SidePanel />
-            <HeaderPanel />
-
-            <ScrollArea className={classes.scrollArea}>
-
-                <div className={classes.feed}>
-                    {children}
-                </div>
-            </ScrollArea>
-        </Flex>
-    );
+      <ScrollArea className={classes.scrollArea}>
+        <div className={classes.feed}>{children}</div>
+      </ScrollArea>
+    </Flex>
+  );
 };

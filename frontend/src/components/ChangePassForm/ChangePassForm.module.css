@@ -1,8 +1,8 @@
 .changePassCard {
-    width: 450px;
-    align-self: center;
+  width: 450px;
+  align-self: center;
 
-    @media (max-width: 675px) {
-        width: 100%;
-    }
+  @media (max-width: 675px) {
+    width: 100%;
+  }
 }

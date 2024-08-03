@@ -6,15 +6,18 @@ export function ColorSchemeToggle() {
 
   return (
     <Card p="xl" shadow="md" className={classes.colorToggleCard}>
-      <Title mb="lg" order={3}>Color Scheme</Title>
-
+      <Title mb="lg" order={3}>
+        Color Scheme
+      </Title>
 
       <Group className={classes.buttons}>
-        <Button className={classes.button} onClick={() => setColorScheme('light')}>Light</Button>
-        <Button className={classes.button} onClick={() => setColorScheme('dark')}>Dark</Button>
+        <Button className={classes.button} onClick={() => setColorScheme('light')}>
+          Light
+        </Button>
+        <Button className={classes.button} onClick={() => setColorScheme('dark')}>
+          Dark
+        </Button>
       </Group>
-
-
     </Card>
   );
 }

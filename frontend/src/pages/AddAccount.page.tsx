@@ -5,9 +5,9 @@ import { Navigator } from '../components/Navigator/Navigator';
 import { AddAccountForm } from '../components/AddAccountForm/AddAccountForm';
 
 export const AddAccountPage: React.FC = () => {
-    return (
-        <Navigator>
-            <AddAccountForm />
-        </Navigator>
-    );
+  return (
+    <Navigator>
+      <AddAccountForm />
+    </Navigator>
+  );
 };

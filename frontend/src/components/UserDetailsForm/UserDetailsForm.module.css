@@ -1,25 +1,25 @@
 .userCard {
-    width: 450px;
-    align-self: center;
+  width: 450px;
+  align-self: center;
 
-    @media (max-width: 675px) {
-        width: 100%;
-    }
+  @media (max-width: 675px) {
+    width: 100%;
+  }
 }
 
 .cardTitle {
-    align-content: center;
-    justify-content: space-between;
+  align-content: center;
+  justify-content: space-between;
 }
 
 .editButton {
-    background-color: var(--primary-color);
+  background-color: var(--primary-color);
 
-    &:hover {
-        background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
-    }
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  }
 }
 
 .saveButton {
-    width: 100%;
+  width: 100%;
 }

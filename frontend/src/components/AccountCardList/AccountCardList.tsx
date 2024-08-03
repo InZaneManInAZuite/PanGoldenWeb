@@ -8,66 +8,61 @@ import { store } from '../../App/Store';
 import { Loading } from '../Loading/Loading';
 import { Missing } from '../Missing/Missing';
 
-
 export const AccountCardList = () => {
+  const user = store.getState().user as User;
+  const [loading, setLoading] = useState(false);
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  const [noAccounts, setNoAccounts] = useState(false);
 
-    const user = store.getState().user as User;
-    const [loading, setLoading] = useState(false);
-    const [accounts, setAccounts] = useState<Account[]>([]);
-    const [noAccounts, setNoAccounts] = useState(false);
+  const getAccounts = async () => {
+    if (!user.id) return;
+    const accounts = await getAccountsByUser(user.id);
+    return accounts;
+  };
 
-    const getAccounts = async () => {
-        if (!user.id) return;
-        const accounts = await getAccountsByUser(user.id);
-        return accounts;
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const accounts = await getAccounts();
+      if (!accounts || accounts.length === 0) {
+        setNoAccounts(true);
+      } else {
+        setAccounts(accounts);
+      }
+      setLoading(false);
     };
 
+    fetchData();
+  }, []);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            const accounts = await getAccounts();
-            if (!accounts || accounts.length === 0) {
-                setNoAccounts(true);
-            } else {
-                setAccounts(accounts);
-            }
-            setLoading(false);
-        }
+  addEventListener('accountsChanged', () => {
+    const fetchData = async () => {
+      setLoading(true);
+      const accounts = await getAccounts();
+      if (!accounts || accounts.length === 0) {
+        setNoAccounts(true);
+      } else {
+        setAccounts(accounts);
+      }
+      setLoading(false);
+    };
 
-        fetchData();
-    }, []);
+    fetchData();
+  });
 
-    addEventListener('accountsChanged', () => {
-        const fetchData = async () => {
-            setLoading(true);
-            const accounts = await getAccounts();
-            if (!accounts || accounts.length === 0) {
-                setNoAccounts(true);
-            } else {
-                setAccounts(accounts);
-            }
-            setLoading(false);
-        }
+  if (loading) {
+    return <Loading />;
+  }
 
-        fetchData();
-    });
+  if (noAccounts) {
+    return <Missing text="No accounts found" />;
+  }
 
-
-    if (loading) {
-        return <Loading />;
-    }
-
-    if (noAccounts) {
-        return (
-            <Missing text="No accounts found" />
-        );
-    }
-
-    return (
-        <Group className={classes.accountCardList} mt="xl">
-            {accounts.map(account => <AccountCard account={account} key={account.id}/>)}
-        </Group>
-    )
-
-}
+  return (
+    <Group className={classes.accountCardList} mt="xl">
+      {accounts.map((account) => (
+        <AccountCard account={account} key={account.id} />
+      ))}
+    </Group>
+  );
+};

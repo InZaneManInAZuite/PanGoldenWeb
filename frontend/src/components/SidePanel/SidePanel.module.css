@@ -6,7 +6,6 @@
   flex-direction: column;
   background-color: var(--mantine-color-yellow-6);
   color: var(--mantine-color-dark-9);
-  
 
   @media (max-width: 450px) {
     display: none;
@@ -14,7 +13,6 @@
 }
 
 .navbarMain {
-  
   flex: 1;
   margin-top: rem(50px);
 }

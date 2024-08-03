@@ -1,17 +1,17 @@
 .accountCardList {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    max-width: 1000px;
-    width: 100vh - 200px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  max-width: 1000px;
+  width: 100vh - 200px;
 
-    @media (max-width: 768px) {
-        flex-direction: column;
-        align-items: center;
-    }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .noAccount {
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }

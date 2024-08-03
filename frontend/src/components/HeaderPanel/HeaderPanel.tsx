@@ -8,33 +8,32 @@ import classes from './HeaderPanel.module.css';
 import { MenuButtons } from '../MenuButtons/MenuButtons';
 
 export const HeaderPanel = () => {
+  const [drawerOpened, { open, close }] = useDisclosure(false);
 
-    const [drawerOpened, { open, close }] = useDisclosure(false);
+  addEventListener('pageChange', close);
 
-    addEventListener('pageChange', close);
+  return (
+    <header className={classes.nav}>
+      <Drawer opened={drawerOpened} onClose={close}>
+        <Overlay className={classes.drawer}>
+          <Center mt="100">
+            <Logo size={60} />
+          </Center>
+          <Stack justify="center" gap={0} p="lg">
+            <MenuButtons />
+          </Stack>
+        </Overlay>
+      </Drawer>
 
-    return (
-        <header className={classes.nav}>
-            <Drawer opened={drawerOpened} onClose={close} >
-                <Overlay className={classes.drawer} >
-                    <Center mt="100">
-                        <Logo size={60} />
-                    </Center>
-                    <Stack justify="center" gap={0} p="lg">
-                        <MenuButtons />
-                    </Stack>
-                </Overlay>
+      <Card className={classes.header} radius="0" p="lg">
+        <Title order={2} className={classes.logoText}>
+          PanGolden
+        </Title>
 
-            </Drawer>
-
-            <Card className={classes.header} radius='0' p="lg">
-                <Title order={2} className={classes.logoText}>PanGolden</Title>
-
-                <Card className={classes.headerMenu} shadow="0" p='0'>
-                    <IconMenu onClick={open} size={35} />
-                </Card>
-            </Card>
-        </header>
-    );
-
-}
+        <Card className={classes.headerMenu} shadow="0" p="0">
+          <IconMenu onClick={open} size={35} />
+        </Card>
+      </Card>
+    </header>
+  );
+};

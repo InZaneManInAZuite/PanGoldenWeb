@@ -5,9 +5,9 @@ import { Navigator } from '../components/Navigator/Navigator';
 import { AccountPageComp } from '../components/AccountPageComp/AccountPageComp';
 
 export const AccountPage: React.FC = () => {
-    return (
-        <Navigator>
-            <AccountPageComp />
-        </Navigator>
-    );
+  return (
+    <Navigator>
+      <AccountPageComp />
+    </Navigator>
+  );
 };

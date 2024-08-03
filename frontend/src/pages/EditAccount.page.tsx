@@ -6,30 +6,26 @@ import { Account } from '../Models/PanGoldenModels';
 import { useNavigate } from 'react-router-dom';
 
 export const EditAccountPage: React.FC = () => {
+  const [account, setAccount] = React.useState<Account>({} as Account);
 
-    const [account, setAccount] = React.useState<Account>({} as Account);
+  const navigate = useNavigate();
+  const storedAccount = store.getState().account;
 
-    const navigate = useNavigate();
-    const storedAccount = store.getState().account;
+  if (!storedAccount.id || storedAccount.id === '') navigate('/Accounts');
 
-    if (!storedAccount.id || storedAccount.id === "") navigate('/Accounts');
+  useEffect(() => {
+    const startBalance = storedAccount.untrackedBalance ? storedAccount.untrackedBalance : '0.00';
+    const account: Account = {
+      id: storedAccount.id,
+      name: storedAccount.name,
+      untrackedBalance: parseFloat(startBalance),
+    };
+    setAccount(account);
+  }, []);
 
-    useEffect(() => {
-        const startBalance = storedAccount.untrackedBalance ? storedAccount.untrackedBalance : '0.00';
-        const account: Account = {
-            id: storedAccount.id,
-            name: storedAccount.name,
-            untrackedBalance: parseFloat(startBalance),
-        }
-        setAccount(account);
-
-    }, []);
-
-
-
-    return (
-        <Navigator>
-            <EditAccount account={account} />
-        </Navigator>
-    );
+  return (
+    <Navigator>
+      <EditAccount account={account} />
+    </Navigator>
+  );
 };
