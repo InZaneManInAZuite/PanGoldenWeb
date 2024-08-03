@@ -1,7 +1,6 @@
 import { Title, Stack, Divider } from '@mantine/core';
 import { AccountCardList } from '../AccountCardList/AccountCardList';
 import { AddNewAccountButton } from '../AddNewAccountButton/AddNewAccountButton';
-import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 
 export const AccountPageComp = () => {
 
@@ -12,7 +11,6 @@ export const AccountPageComp = () => {
             <Divider />
             <AccountCardList/>
             <AddNewAccountButton />
-            <ColorSchemeToggle />
         </Stack>
     )
 

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Account } from '../../Models/PanGoldenModels';
 
 const accountSlice = createSlice({
     name: 'accounts',
@@ -13,6 +12,7 @@ const accountSlice = createSlice({
         setAccount: (state, action) => {
             state.id = action.payload.id;
             state.name = action.payload.name;
+            state.balance = action.payload.balance;
             state.untrackedBalance = action.payload.untrackedBalance;
         },
         setBalance: (state, action) => {

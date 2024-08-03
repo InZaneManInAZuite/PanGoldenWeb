@@ -5,6 +5,7 @@ import { Theme } from './Theme';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './App/Store';
 import { Provider } from 'react-redux';
+import '@mantine/dates/styles.css';
 
 
 export default function App() {

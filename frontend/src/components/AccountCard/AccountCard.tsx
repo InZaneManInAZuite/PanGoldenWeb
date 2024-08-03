@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { store } from '../../App/Store';
 import { useNavigate } from 'react-router-dom';
 import { DeleteAccountConfirm } from '../DeleteAccountConfirm/DeleteAccountConfirm';
+import GetBalance from '@/Features/GetBalance';
 
 export const AccountCard = ({ account }: { account: Account }) => {
 
@@ -23,37 +24,10 @@ export const AccountCard = ({ account }: { account: Account }) => {
 
     const navigate = useNavigate();
 
-
-    const getTransactions = async () => {
-        if (!account.id) return;
-        const transactions = await getTransactionsByAccount(account.id);
-        return transactions;
-    }
-
-    const getBalance = async () => {
-        const transactions = await getTransactions();
-        if (!transactions || transactions.length === 0) return account.untrackedBalance;
-        let balance = account.untrackedBalance || 0;
-        transactions.forEach((transaction: Transaction) => {
-            switch (transaction.type) {
-                case 0:
-                    balance += transaction.amount || 0;
-                    break;
-                case 1:
-                    balance -= transaction.amount || 0;
-                    break;
-                default:
-                    break;
-            }
-        });
-
-        return balance;
-    }
-
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            const balance = await getBalance();
+            const balance = await GetBalance(account);
             setBalanced(balance || 0);
             setLoading(false);
         }
@@ -61,15 +35,12 @@ export const AccountCard = ({ account }: { account: Account }) => {
     }, []);
 
     const setPage = (page: string) => {
-        store.dispatch({ type: 'page/setPage', payload: page });
+        store.dispatch({ type: 'Page/setPage', payload: page });
     };
 
     const setAccount = (account: Account) => {
         store.dispatch({ type: 'accounts/setAccount', payload: account });
     };
-
-
-
 
 
 
@@ -101,7 +72,7 @@ export const AccountCard = ({ account }: { account: Account }) => {
                         </Popover.Target>
                         <Popover.Dropdown p="5">
                             <Card className={classes.info} p='2' mb="2" onClick={() => {
-                                store.dispatch({ type: 'accounts/setAccount', payload: account });
+                                setAccount(account);
                                 navigate('/Accounts/Edit');
                             }}>
                                 <IconEdit size={30} />

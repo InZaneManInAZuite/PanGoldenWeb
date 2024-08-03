@@ -13,7 +13,7 @@ const clearUser = () => {
 }
 
 const clearAccounts = () => {
-    store.dispatch({ type: 'accounts/clearAccounts' });
+    store.dispatch({ type: 'accounts/clearAccount' });
 }
 
 export const LogOutButton = () => {

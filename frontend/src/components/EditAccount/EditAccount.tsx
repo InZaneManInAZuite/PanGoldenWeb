@@ -1,6 +1,6 @@
 import { Card, TextInput, NumberInput, Button, Stack, Title, Anchor } from '@mantine/core';
 import { Account } from '../../Models/PanGoldenModels';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { updateAccount } from '@/Services/AccountService';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
