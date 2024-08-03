@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { HomePage } from './Pages/Home.page';
-import { AuthPage } from './Pages/Auth.page';
-import { AccountPage } from './Pages/Account.page';
-import { AddAccountPage } from './Pages/AddAccount.page';
-import { UserPage } from './Pages/User.page';
-import { AnalyticsPage } from './Pages/Analytics.page';
-import { TransactionsPage } from './Pages/Transactions.page';
-import { PageNotFound } from './Pages/PageNotFound.page';
-import { EditAccountPage } from './Pages/EditAccount.page';
+import { HomePage } from './pages/Home.page';
+import { AuthPage } from './pages/Auth.page';
+import { AccountPage } from './pages/Account.page';
+import { AddAccountPage } from './pages/AddAccount.page';
+import { UserPage } from './pages/User.page';
+import { AnalyticsPage } from './pages/Analytics.page';
+import { TransactionsPage } from './pages/Transactions.page';
+import { PageNotFound } from './pages/PageNotFound.page';
+import { EditAccountPage } from './pages/EditAccount.page';
 
 export const router = createBrowserRouter([
   {
