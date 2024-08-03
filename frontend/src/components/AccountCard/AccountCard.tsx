@@ -1,6 +1,6 @@
 // Create cards for accounts
 
-import { Card, Stack, Title, Group, Text, Popover, Divider, Button, Modal } from '@mantine/core';
+import { Card, Stack, Title, Group, Text, Popover, Divider, Paper, Modal } from '@mantine/core';
 import { Account, Transaction } from '../../Models/PanGoldenModels';
 import classes from './AccountCard.module.css';
 import {
@@ -19,7 +19,7 @@ export const AccountCard = ({ account }: { account: Account }) => {
     const [balanced, setBalanced] = useState(0);
     const [loading, setLoading] = useState(true);
     const [openedModal, setOpenedModal] = useState(false);
-    const [active, setActive] = useState(false);
+    const [disabled, setdisabled] = useState(false);
 
     const navigate = useNavigate();
 
@@ -60,6 +60,14 @@ export const AccountCard = ({ account }: { account: Account }) => {
         fetchData();
     }, []);
 
+    const setPage = (page: string) => {
+        store.dispatch({ type: 'page/setPage', payload: page });
+    };
+
+    const setAccount = (account: Account) => {
+        store.dispatch({ type: 'accounts/setAccount', payload: account });
+    };
+
 
 
 
@@ -67,21 +75,27 @@ export const AccountCard = ({ account }: { account: Account }) => {
 
     return (
         <>
-            <Card radius="md" className={classes.card} withBorder>
+            <Card radius="md" className={classes.card} withBorder p="0">
 
-                <Group className={classes.contents}>
+                <Group className={classes.allContent}>
+                    <Card className={classes.content} p="md" onClick={() => {
+                            setAccount(account);
+                            setPage('Transactions');
+                            navigate('/Transactions');
+                        }}>
+                        <Stack gap="0px">
+                            <Title order={3}>{account.name}</Title>
+                            {loading ? <Text>$--.--</Text> : <Text>${balanced || '0.00'}</Text>}
+                        </Stack>
+                    </Card>
 
-                    <Stack gap="0px">
-                        <Title order={3}>{account.name}</Title>
-                        {loading ? <Text>$--.--</Text> : <Text>${balanced || '0.00'}</Text>}
-                    </Stack>
 
 
 
 
-                    <Popover position="right" disabled={active}>
+                    <Popover position="right" disabled={disabled}>
                         <Popover.Target>
-                            <Card className={classes.info} p='2'>
+                            <Card className={classes.info} p='0'>
                                 <IconInfo size={30} />
                             </Card>
                         </Popover.Target>
@@ -95,7 +109,7 @@ export const AccountCard = ({ account }: { account: Account }) => {
                             <Divider />
                             <Card className={classes.info} p='2' mt="2">
                                 <IconDelete size={30} onClick={() => {
-                                    setActive(true);
+                                    setdisabled(true);
                                     setOpenedModal(true);
                                 }} />
                             </Card>
@@ -109,8 +123,8 @@ export const AccountCard = ({ account }: { account: Account }) => {
 
             <Modal opened={openedModal} onClose={() => {
                 setOpenedModal(false);
-                setActive(false);
-                }} >
+                setdisabled(false);
+            }} >
                 <DeleteAccountConfirm account={account} />
             </Modal>
         </>

@@ -12,19 +12,38 @@
         box-shadow: var(--mantine-shadow-md);
     }
 
-
-    @media (max-width: 330px) {
-        width: calc(100vw - var(--mantine-spacing-xl));
-        max-width: 100vw;
+    @media all and (max-width: 350px) {
+        width: calc(100vw - 50px);
         flex-direction: column;
+    }
+
+    @media all and ((max-width: 550px) and (min-width: 450px)) {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    
+}
+
+.content {
+    width: 245px;
+    padding: var(--mantine-padding-md);
+
+    @media all and (max-width: 350px) {
+        width: calc(100vw - 100px);
+    }
+
+    @media all and ((max-width: 550px) and (min-width: 450px)) {
+        width: calc(100vw - 305px );
     }
 }
 
-.contents {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.allContent {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    height: 100%;
 }
 
 .info {
