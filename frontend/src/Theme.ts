@@ -15,19 +15,18 @@ export const Theme = createTheme({
       '#39588f',
       '#2d4b81',
     ],
-    
   },
 
   components: {
     Button: {
       defaultProps: {
         color: 'yellow',
-      }
-    }
+      },
+    },
   },
 
   shadows: {
     md: '1px 1px 3px rgba(0, 0, 0, .25)',
     xl: '5px 5px 3px rgba(0, 0, 0, .25)',
-  }
+  },
 });

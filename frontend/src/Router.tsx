@@ -13,34 +13,43 @@ export const router = createBrowserRouter([
   {
     path: '/Home',
     element: <HomePage />,
-  },{
+  },
+  {
     path: '/Auth',
     element: <AuthPage />,
-  },{
+  },
+  {
     path: '/Accounts',
     element: <AccountPage />,
-  },{
+  },
+  {
     path: '/Accounts/Add',
     element: <AddAccountPage />,
-  },{
+  },
+  {
     path: '/User',
     element: <UserPage />,
-  },{
+  },
+  {
     path: '/Analytics',
     element: <AnalyticsPage />,
-  },{
+  },
+  {
     path: '/Transactions',
     element: <TransactionsPage />,
-  },{
+  },
+  {
     path: '/',
     element: <AccountPage />,
-  },{
+  },
+  {
     path: '/Accounts/Edit',
     element: <EditAccountPage />,
-  },{
+  },
+  {
     path: '*',
     element: <PageNotFound />,
-  }
+  },
 ]);
 
 export function Router() {
