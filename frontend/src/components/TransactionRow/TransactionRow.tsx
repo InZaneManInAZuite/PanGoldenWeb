@@ -3,7 +3,7 @@ import { Transaction, TransactionType } from '../../Models/PanGoldenModels';
 import { store } from '../../App/Store';
 import { updateTransaction, deleteTransaction } from '../../Services/TransactionService';
 import { useForm } from '@mantine/form';
-import { Text, TextInput, NumberInput, Card, Table, Group, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core';
+import { Text, TextInput, NumberInput, Card, Table, Group } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { IconTrash, IconEdit, IconCheck, IconX } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
