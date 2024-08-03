@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { TextInput, Button, Card, NumberInput, Stack, Anchor } from '@mantine/core';
+import { TextInput, Button, Card, NumberInput, Stack, Anchor, Title } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
 import { User, Account } from '../../Models/PanGoldenModels';
 import { addAccount } from '../../Services/AccountService';
@@ -12,7 +12,7 @@ export const AddAccountForm: React.FC = () => {
     const form = useForm({
         initialValues: {
             accountName: '',
-            startBalance: 0.00,
+            startBalance: '',
         },
         validate: {
             accountName: (value) => {
@@ -33,14 +33,14 @@ export const AddAccountForm: React.FC = () => {
     const handleAddAccount = async () => {
         const account: Account = {
             name: form.values.accountName,
-            untrackedBalance: form.values.startBalance,
+            untrackedBalance: parseFloat(form.values.startBalance),
             userId: user.id || '',
         };
         try {
             await addAccount(account);
             navigate('/Accounts');
         } catch (error) {
-            console.error(error);
+            console.log('Account Name Already Exists')
             if (!nameExists) toggleNameExists();
         }
     }
@@ -52,6 +52,7 @@ export const AddAccountForm: React.FC = () => {
             <form onSubmit={form.onSubmit(() => {
                 handleAddAccount();
             })}>
+                <Title mb="lg">Add Account</Title>
                 <Stack>
                     <TextInput
                         label="Account Name"
@@ -59,7 +60,7 @@ export const AddAccountForm: React.FC = () => {
                         value={form.values.accountName}
                         onChange={(event) => form.setFieldValue('accountName', event.currentTarget.value)}
                         error={form.errors.accountName}
-                        maxLength={20}
+                        maxLength={15}
                     />
                     <NumberInput
                         label="Starting Balance"
@@ -72,6 +73,7 @@ export const AddAccountForm: React.FC = () => {
                         hideControls
                         leftSection="$"
                         fixedDecimalScale={true}
+                        onChange={(event) => form.setFieldValue('startBalance', event.toString())}
                     />
                 </Stack>
 

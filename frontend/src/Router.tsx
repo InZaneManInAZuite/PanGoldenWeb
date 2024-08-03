@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HomePage } from './Pages/Home.page';
 import { AuthPage } from './Pages/Auth.page';
-import { SettingsPage } from './Pages/Settings.page';
 import { AccountPage } from './Pages/Account.page';
 import { AddAccountPage } from './Pages/AddAccount.page';
 import { UserPage } from './Pages/User.page';
 import { AnalyticsPage } from './Pages/Analytics.page';
 import { TransactionsPage } from './Pages/Transactions.page';
-import { MainPage } from './Pages/Main.page';
+import { PageNotFound } from './Pages/PageNotFound.page';
+import { EditAccountPage } from './Pages/EditAccount.page';
 
 export const router = createBrowserRouter([
   {
@@ -16,9 +16,6 @@ export const router = createBrowserRouter([
   },{
     path: '/Auth',
     element: <AuthPage />,
-  },{
-    path: '/Main',
-    element: <MainPage />,
   },{
     path: '/Accounts',
     element: <AccountPage />,
@@ -29,9 +26,6 @@ export const router = createBrowserRouter([
     path: '/User',
     element: <UserPage />,
   },{
-    path: '/Settings',
-    element: <SettingsPage />,
-  },{
     path: '/Analytics',
     element: <AnalyticsPage />,
   },{
@@ -40,6 +34,12 @@ export const router = createBrowserRouter([
   },{
     path: '/',
     element: <AccountPage />,
+  },{
+    path: '/Accounts/Edit',
+    element: <EditAccountPage />,
+  },{
+    path: '*',
+    element: <PageNotFound />,
   }
 ]);
 

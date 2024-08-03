@@ -12,6 +12,10 @@ const clearUser = () => {
     store.dispatch({ type: 'user/clearUser' });
 }
 
+const clearAccounts = () => {
+    store.dispatch({ type: 'accounts/clearAccounts' });
+}
+
 export const LogOutButton = () => {
     const navigate = useNavigate();
 
@@ -21,6 +25,7 @@ export const LogOutButton = () => {
 
                 clearPage();
                 clearUser();
+                clearAccounts();
                 navigate('/Auth');
             }}
         >

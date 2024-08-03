@@ -21,6 +21,7 @@ export interface Transaction {
   id?: string;
   type?: TransactionType;
   description?: string;
+  amount?: number;
   date?: Date;
   accountId?: string;
   account?: Account;

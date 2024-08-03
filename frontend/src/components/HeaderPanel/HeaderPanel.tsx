@@ -1,12 +1,9 @@
 // Create a disclosure panel that can be opened and closed
 import { useDisclosure } from '@mantine/hooks';
 import { Center, Drawer, Stack, Card, Title, Overlay } from '@mantine/core';
+import { Logo } from '../Logo/Logo';
 
-import {
-    IconZodiacCancer as IconLogo,
-
-    IconMenu2 as IconMenu
-} from '@tabler/icons-react';
+import { IconMenu2 as IconMenu } from '@tabler/icons-react';
 import classes from './HeaderPanel.module.css';
 import { MenuButtons } from '../MenuButtons/MenuButtons';
 
@@ -21,7 +18,7 @@ export const HeaderPanel = () => {
             <Drawer opened={drawerOpened} onClose={close} >
                 <Overlay className={classes.drawer} >
                     <Center mt="100">
-                        <IconLogo type="mark" size={60} />
+                        <Logo size={60} />
                     </Center>
                     <Stack justify="center" gap={0} p="lg">
                         <MenuButtons />

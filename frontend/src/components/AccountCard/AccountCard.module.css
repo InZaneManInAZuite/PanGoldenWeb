@@ -5,12 +5,30 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+    box-shadow: var(--mantine-shadow-lg);
+    align-items: center;
 
-    
+    &:hover {
+        box-shadow: var(--mantine-shadow-md);
+    }
 
-    @media (max-width: 325px) {
-        width: calc(100vw - var(--mantine-spacing-lg));
+
+    @media (max-width: 330px) {
+        width: calc(100vw - var(--mantine-spacing-xl));
         max-width: 100vw;
         flex-direction: column;
+    }
+}
+
+.contents {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.info {
+    &:hover {
+        background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-gray-9));
     }
 }

@@ -66,6 +66,8 @@ public class AccountService(PanGoldenContext context)
         var accountFound = await context.Accounts.FirstOrDefaultAsync(a => a.id == account.id)
             ?? throw new PanGoldenException(WarnName.AccountNotFound);
 
+        account.userId = accountFound.userId;
+
         // Check if account name exists
         if (await context.Accounts.AnyAsync(a => a.name == account.name && a.id != account.id && a.userId == account.userId))
             throw new PanGoldenException(WarnName.AccountExists);
