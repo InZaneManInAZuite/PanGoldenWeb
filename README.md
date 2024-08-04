@@ -1,6 +1,8 @@
 # PanGoldenWeb
-PanGolden is a web application that allows a user to keep track of financial expenses.
-It lets you create your user in which 
+
+PanGolden is a very basic web application that allows a user to keep track of 
+financial expenses. It lets you create transactions, which can be inside accounts,
+which are inside a user.
 
 # Table of Content
 
@@ -40,7 +42,7 @@ dotnet run
 Then in another terminal:
 
 cd ./frontend
-npm run build
+npm run dev
 
 After waiting for both parts of the program to load, PanGolden should now be ready to use
 locally in your device.
@@ -79,10 +81,48 @@ find tools to edit or delete these transactions.
 
 ## User Page
 
-Once you are satisfied with using the app, you can head on to the user page. Here, you will be able to see 
+Once you are satisfied with using the app, you can head on to the user page. Here, you will be able to see user details
+which you have the option to edit, a change password form. There is also a color scheme picker that lets you choose a
+light theme or a dark theme. And finally, there is a log out button. 
 
+## Page 404 Not Found
 
+There is also a page when you input an invalid address.
 
 # Requirements
+
+## Frontend
+
+PanGolden uses React with Typscript as its language.
+
+PanGolden uses the Mantine styling library to style the entire webapp.
+
+PanGolden uses CSS @media querries in order to respond to UI changes.
+
+PanGolden uses React Router for navigation between pages.
+
+PanGolden uses Git extensively.
+
+## Backend
+
+PanGolden uses C# using .NET8 as its language.
+
+PanGolden uses Entity Framework Core for its backend system.
+
+PanGolden uses SQL database to store its data.
+
+PanGolden utilises CRUD extensively in creating, getting, updatting, and deleting from the database such as accounts and transactions.
+
+## Advanced
+
+PanGolden uses Redux especially in storing global info such as User relevant info
+
+PanGolden allows for the use of a light and dark mode.
+
+PanGolden tests for backend unit testing
+
+
+
+
 
 
