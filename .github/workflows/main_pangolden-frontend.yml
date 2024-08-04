@@ -28,7 +28,7 @@ jobs:
           npm run test --prefix frontend --if-present
 
       - name: Zip artifact for deployment
-        run: zip release.zip -r ./*
+        run: zip -r dist.zip ./frontend*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -52,7 +52,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip dist.zip
       
       - name: Login to Azure
         uses: azure/login@v2
