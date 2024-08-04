@@ -33,8 +33,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 const menuOptions = [
   { icon: IconUser, label: 'User' },
   { icon: IconAccounts, label: 'Accounts' },
-  { icon: IconTransactions, label: 'Transactions' },
-  { icon: IconAnalytics, label: 'Analytics' },
+  { icon: IconTransactions, label: 'Transactions' }
 ];
 
 export const MenuButtons = () => {
