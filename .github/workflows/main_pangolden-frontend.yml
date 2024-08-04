@@ -28,7 +28,7 @@ jobs:
           npm run test --prefix frontend --if-present
 
       - name: Zip artifact for deployment
-        run: zip -r dist.zip ./frontend*
+        run: zip -r dist.zip ./frontend/*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
