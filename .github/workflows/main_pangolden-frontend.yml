@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Ignore Yarn
-        run: yarn config set ignore-engines true
+        run: export YARN_IGNORE_NODE=1
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
