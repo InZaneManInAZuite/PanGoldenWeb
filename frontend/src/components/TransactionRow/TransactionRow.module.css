@@ -1,0 +1,44 @@
+.row {
+    height: 30px;
+    width: calc(100vw - 230px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+
+    @media (max-width: 450px) {
+        width: 90vw;
+    }
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50px;
+}
+
+.date {
+    width: 95px;
+}
+
+.amount {
+    width: 95px;
+}
+
+.desc {
+    width: calc(100vw - 440px);
+    max-width: calc(1000px - 240px);
+
+    @media (max-width: 690px) {
+        display: none;
+    }
+}
+
+.together {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 250px;
+}

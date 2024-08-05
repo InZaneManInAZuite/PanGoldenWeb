@@ -34,7 +34,6 @@ const menuOptions = [
   { icon: IconUser, label: 'User' },
   { icon: IconAccounts, label: 'Accounts' },
   { icon: IconTransactions, label: 'Transactions' },
-  { icon: IconAnalytics, label: 'Analytics' },
 ];
 
 export const MenuButtons = () => {

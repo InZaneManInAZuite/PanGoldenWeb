@@ -24,15 +24,8 @@ export const TransactionPageComp = () => {
       <Divider />
       <TransactionsAccountSelector />
       <Divider />
-      {noAccount ? (
-        <Missing text="No Account Selected" />
-      ) : (
-        <ScrollArea>
-          <TransactionTable />
-        </ScrollArea>
-      )}
+      {noAccount ? <Missing text="No Account Selected" /> : <TransactionTable />}
       <Divider />
-      <ColorSchemeToggle />
     </Stack>
   );
 };
