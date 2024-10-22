@@ -119,8 +119,6 @@ PanGolden uses Redux especially in storing global info such as User relevant inf
 
 PanGolden allows for the use of a light and dark mode.
 
-PanGolden tests for backend unit testing
-
 
 
 
